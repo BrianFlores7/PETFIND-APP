@@ -33,12 +33,12 @@ class InputEmail extends StatelessWidget {
           TextField(
             controller: _textControllerEmail,
             style: (const TextStyle(
-              color: Colors.white,
+              color: ColorsViews.black_word,
               fontWeight: FontWeight.w400,
             )),
             keyboardType: TextInputType.emailAddress,
             obscureText: false,
-            cursorColor: Colors.white,
+            cursorColor: ColorsViews.black_word,
             decoration: const InputDecoration(
               hintText: Labels.email_example,
             ),

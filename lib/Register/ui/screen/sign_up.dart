@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:petfind/Labels/labels.dart';
+import 'package:petfind/Register/ui/widget/logo_sign_up.dart';
+import 'package:petfind/Register/ui/widget/sign_up_text.dart';
 import 'package:petfind/colors/colors_views.dart';
 import 'package:petfind/components/input_email.dart';
 import 'package:petfind/components/input_user.dart';
@@ -17,10 +19,13 @@ class CreateAccount extends StatefulWidget {
 
 class _CreateAccountState extends State<CreateAccount> {
   bool _passwordVisible = false;
+  bool _passwordVisibleConfirm = false;
 
   var signInController = RegisterController(RegisterApiRepository());
   TextEditingController _textControllerEmail = TextEditingController(text: "");
   TextEditingController _textControllerPassword =
+      TextEditingController(text: "");
+  TextEditingController _textControllerPasswordConfirm =
       TextEditingController(text: "");
   TextEditingController _textControllerPhone = TextEditingController(text: "");
   @override
@@ -37,10 +42,7 @@ class _CreateAccountState extends State<CreateAccount> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-              width: width * 0.6,
-              child: Image.asset('assets/LOGO_PETFIND.png'),
-            ),
+            logoSignUp(width),
             Padding(
               padding: EdgeInsets.only(
                 left: width * 0.02,
@@ -50,109 +52,10 @@ class _CreateAccountState extends State<CreateAccount> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.fromLTRB(20, 10, 20, 8),
-                    child: Text(
-                      Labels.sign_up,
-                      style: TextStyle(
-                          color: ColorsViews.black_word,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 35),
-                    ),
-                  ),
+                  signUpText(),
                   InputUser(textControllerEmail: _textControllerEmail),
-                  Container(
-                    margin: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        const Text(
-                          Labels.password,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                              color: ColorsViews.pink_word),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        TextField(
-                          controller: _textControllerPassword,
-                          style: (const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w400,
-                          )),
-                          obscureText: _passwordVisible,
-                          cursorColor: Colors.white,
-                          decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                // Based on passwordVisible state choose the icon
-                                _passwordVisible
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                                color: ColorsViews.hide_password,
-                              ),
-                              onPressed: () {
-                                // Update the state i.e. toogle the state of passwordVisible variable
-                                setState(() {
-                                  _passwordVisible = !_passwordVisible;
-                                });
-                              },
-                            ),
-                            hintText: Labels.hint_text_password,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        const Text(
-                          Labels.confirm_password,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                              color: ColorsViews.pink_word),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        TextField(
-                          controller: _textControllerPassword,
-                          style: (const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w400,
-                          )),
-                          obscureText: _passwordVisible,
-                          cursorColor: Colors.white,
-                          decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                // Based on passwordVisible state choose the icon
-                                _passwordVisible
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                                color: ColorsViews.hide_password,
-                              ),
-                              onPressed: () {
-                                // Update the state i.e. toogle the state of passwordVisible variable
-                                setState(() {
-                                  _passwordVisible = !_passwordVisible;
-                                });
-                              },
-                            ),
-                            hintText: Labels.hint_text_password,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  passwordField(),
+                  confirmPasswordField(),
                   InputEmail(textControllerEmail: _textControllerEmail),
                   registerBtn(
                     textControllerEmail: _textControllerEmail,
@@ -166,6 +69,98 @@ class _CreateAccountState extends State<CreateAccount> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Container confirmPasswordField() {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const Text(
+            Labels.confirm_password,
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+                color: ColorsViews.pink_word),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          TextField(
+            controller: _textControllerPasswordConfirm,
+            style: (const TextStyle(
+              color: ColorsViews.black_word,
+              fontWeight: FontWeight.w400,
+            )),
+            obscureText: _passwordVisibleConfirm,
+            cursorColor: ColorsViews.black_word,
+            decoration: InputDecoration(
+              suffixIcon: IconButton(
+                icon: Icon(
+                  // Based on passwordVisible state choose the icon
+                  _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                  color: ColorsViews.hide_password,
+                ),
+                onPressed: () {
+                  // Update the state i.e. toogle the state of passwordVisible variable
+                  setState(() {
+                    _passwordVisibleConfirm = !_passwordVisibleConfirm;
+                  });
+                },
+              ),
+              hintText: Labels.hint_text_password,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container passwordField() {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const Text(
+            Labels.password,
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+                color: ColorsViews.pink_word),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          TextField(
+            controller: _textControllerPassword,
+            style: (const TextStyle(
+              color: ColorsViews.black_word,
+              fontWeight: FontWeight.w400,
+            )),
+            obscureText: _passwordVisible,
+            cursorColor: ColorsViews.black_word,
+            decoration: InputDecoration(
+              suffixIcon: IconButton(
+                icon: Icon(
+                  // Based on passwordVisible state choose the icon
+                  _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                  color: ColorsViews.hide_password,
+                ),
+                onPressed: () {
+                  // Update the state i.e. toogle the state of passwordVisible variable
+                  setState(() {
+                    _passwordVisible = !_passwordVisible;
+                  });
+                },
+              ),
+              hintText: Labels.hint_text_password,
+            ),
+          ),
+        ],
       ),
     );
   }

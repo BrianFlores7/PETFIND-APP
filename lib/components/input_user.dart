@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:petfind/colors/colors_views.dart';
 
-
 class InputUser extends StatelessWidget {
   const InputUser({
     Key? key,
@@ -34,13 +33,14 @@ class InputUser extends StatelessWidget {
             TextField(
               controller: _textControllerEmail,
               style: (const TextStyle(
-                  color: ColorsViews.pink_word, fontWeight: FontWeight.w400)),
+                color: ColorsViews.black_word,
+                fontWeight: FontWeight.w400,
+              )),
               keyboardType: TextInputType.emailAddress,
-              cursorColor: Colors.white,
+              cursorColor: ColorsViews.black_word,
               obscureText: false,
               decoration: const InputDecoration(
                 hintText: 'USEREXAMPLE',
-                
               ),
             ),
           ],
