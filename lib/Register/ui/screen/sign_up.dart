@@ -1,0 +1,172 @@
+import 'package:flutter/material.dart';
+import 'package:petfind/Labels/labels.dart';
+import 'package:petfind/colors/colors_views.dart';
+import 'package:petfind/components/input_email.dart';
+import 'package:petfind/components/input_user.dart';
+import '../../repository/register_api.dart';
+import '../../repository/register_controller.dart';
+import '../widget/go_back_button.dart';
+import '../widget/if_have_account.dart';
+
+import '../widget/register_btn.dart';
+
+class CreateAccount extends StatefulWidget {
+  @override
+  _CreateAccountState createState() => _CreateAccountState();
+}
+
+class _CreateAccountState extends State<CreateAccount> {
+  bool _passwordVisible = false;
+
+  var signInController = RegisterController(RegisterApiRepository());
+  TextEditingController _textControllerEmail = TextEditingController(text: "");
+  TextEditingController _textControllerPassword =
+      TextEditingController(text: "");
+  TextEditingController _textControllerPhone = TextEditingController(text: "");
+  @override
+  Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      appBar: AppBar(
+          elevation: 0,
+          leading: goBackButton(context),
+          backgroundColor: ColorsViews.background_color),
+      backgroundColor: ColorsViews.background_color,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              width: width * 0.6,
+              child: Image.asset('assets/LOGO_PETFIND.png'),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                left: width * 0.02,
+                right: width * 0.04,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(20, 10, 20, 8),
+                    child: Text(
+                      Labels.sign_up,
+                      style: TextStyle(
+                          color: ColorsViews.black_word,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 35),
+                    ),
+                  ),
+                  InputUser(textControllerEmail: _textControllerEmail),
+                  Container(
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        const Text(
+                          Labels.password,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: ColorsViews.pink_word),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextField(
+                          controller: _textControllerPassword,
+                          style: (const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w400,
+                          )),
+                          obscureText: _passwordVisible,
+                          cursorColor: Colors.white,
+                          decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                // Based on passwordVisible state choose the icon
+                                _passwordVisible
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: ColorsViews.hide_password,
+                              ),
+                              onPressed: () {
+                                // Update the state i.e. toogle the state of passwordVisible variable
+                                setState(() {
+                                  _passwordVisible = !_passwordVisible;
+                                });
+                              },
+                            ),
+                            hintText: Labels.hint_text_password,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        const Text(
+                          Labels.confirm_password,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: ColorsViews.pink_word),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextField(
+                          controller: _textControllerPassword,
+                          style: (const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w400,
+                          )),
+                          obscureText: _passwordVisible,
+                          cursorColor: Colors.white,
+                          decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                // Based on passwordVisible state choose the icon
+                                _passwordVisible
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: ColorsViews.hide_password,
+                              ),
+                              onPressed: () {
+                                // Update the state i.e. toogle the state of passwordVisible variable
+                                setState(() {
+                                  _passwordVisible = !_passwordVisible;
+                                });
+                              },
+                            ),
+                            hintText: Labels.hint_text_password,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  InputEmail(textControllerEmail: _textControllerEmail),
+                  registerBtn(
+                    textControllerEmail: _textControllerEmail,
+                    textControllerPassword: _textControllerPassword,
+                    textControllerPhone: _textControllerPhone,
+                    signInController: signInController,
+                  ),
+                  const If_have_account()
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
