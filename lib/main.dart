@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petfind/Home/ui/screen/home_main.dart';
 import 'package:petfind/Register/ui/screen/sign_up.dart';
 
 
@@ -40,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CreateAccount(),
+      body: HomeView(),
      );
   }
 }

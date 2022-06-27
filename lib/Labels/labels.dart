@@ -14,4 +14,8 @@ class Labels{
   static const String create_account = 'CREATE ACCOUNT'; 
   static const String already_have_account = 'Already have an account?'; 
   static const String sign_in = 'Sign in'; 
+  static const String welcome = 'Welcome'; 
+  static const String what_do_you_want_to_do = 'What do you want to do?'; 
+  static const String adopt = 'Adopt'; 
+  static const String give_up_for_adoption = 'Give up \n for adoption'; 
 }
