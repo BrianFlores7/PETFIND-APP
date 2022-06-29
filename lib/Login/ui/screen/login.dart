@@ -26,7 +26,7 @@ class _LoginState extends State<Login> {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: true,
-        backgroundColor: ColorsViews.background_color,
+        backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Column(
             children: [
