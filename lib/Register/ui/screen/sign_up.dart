@@ -37,8 +37,8 @@ class _CreateAccountState extends State<CreateAccount> {
       appBar: AppBar(
           elevation: 0,
           leading: goBackButton(context),
-          backgroundColor: ColorsViews.background_color),
-      backgroundColor: ColorsViews.background_color,
+          backgroundColor: Colors.white),
+      
       body: SingleChildScrollView(
         child: Column(
           children: [
