@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:petfind/Labels/labels.dart';
 import 'package:petfind/colors/colors_views.dart';
+import 'package:petfind/components/snack_bar_notification.dart';
+import 'package:petfind/validations/email_password.dart';
 import '../../../components/rounded_btn.dart';
 import '../../model/login.dart';
 import '../../repository/login_controller.dart';
@@ -37,13 +39,12 @@ class LoginBtn extends StatelessWidget {
               );
               EasyLoading.show(status: 'Cargando...');
               var result = await loginController.login(user);
+              
               EasyLoading.dismiss();
-              if (result == 'true') {
+              if (result == 'true' && validatePassword(_textControllerPassword.text)) {
                 Navigator.popAndPushNamed(context, '/success');
               } else {
-                const snackBar = SnackBar(
-                  content: Text('Usuario o contraseña incorrectos'),
-                );
+                var snackBar = snackBarNotification(Labels.password_or_email_incorrect);
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               }
             } catch (e) {

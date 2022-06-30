@@ -18,4 +18,7 @@ class Labels{
   static const String what_do_you_want_to_do = 'What do you want to do?'; 
   static const String adopt = 'Adopt'; 
   static const String give_up_for_adoption = 'Give up \n for adoption'; 
+  static const String passwor_dont_match = 'Password do not match'; 
+  static const String password_or_email_incorrect = 'Password or Email are not correct.'; 
+  static const String something_went_wrong = 'Something went wrong, try again.'; 
 }
