@@ -27,7 +27,7 @@ class _CreateAccountState extends State<CreateAccount> {
       TextEditingController(text: "");
   TextEditingController _textControllerPasswordConfirm =
       TextEditingController(text: "");
-  TextEditingController _textControllerPhone = TextEditingController(text: "");
+  TextEditingController _textControllerUser = TextEditingController(text: "");
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -53,14 +53,15 @@ class _CreateAccountState extends State<CreateAccount> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   signUpText(),
-                  InputUser(textControllerEmail: _textControllerEmail),
+                  InputUser(textControllerUser: _textControllerUser),
                   passwordField(),
                   confirmPasswordField(),
                   InputEmail(textControllerEmail: _textControllerEmail),
                   registerBtn(
                     textControllerEmail: _textControllerEmail,
                     textControllerPassword: _textControllerPassword,
-                    textControllerPhone: _textControllerPhone,
+                    textControllerConfirmPassword: _textControllerPasswordConfirm,
+                    textControllerUser: _textControllerUser,
                     signInController: signInController,
                   ),
                   const If_have_account()
