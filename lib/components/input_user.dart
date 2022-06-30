@@ -4,11 +4,11 @@ import 'package:petfind/colors/colors_views.dart';
 class InputUser extends StatelessWidget {
   const InputUser({
     Key? key,
-    required TextEditingController textControllerEmail,
-  })  : _textControllerEmail = textControllerEmail,
+    required TextEditingController textControllerUser,
+  })  : _textControllerUser = textControllerUser,
         super(key: key);
 
-  final TextEditingController _textControllerEmail;
+  final TextEditingController _textControllerUser;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class InputUser extends StatelessWidget {
               height: 10,
             ),
             TextField(
-              controller: _textControllerEmail,
+              controller: _textControllerUser,
               style: (const TextStyle(
                 color: ColorsViews.black_word,
                 fontWeight: FontWeight.w400,
