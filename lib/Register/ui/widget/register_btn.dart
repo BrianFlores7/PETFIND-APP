@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:petfind/Labels/labels.dart';
 import 'package:petfind/colors/colors_views.dart';
 import 'package:petfind/components/rounded_btn.dart';
+import 'package:petfind/components/snack_bar_notification.dart';
+import 'package:petfind/validations/email_password.dart';
 import '../../model/sign_in.dart';
 import '../../repository/register_controller.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -41,22 +43,25 @@ class registerBtn extends StatelessWidget {
                   _textControllerPassword.text, _textControllerUser.text);
               if (_textControllerConfirmPassword.text ==
                   _textControllerPassword.text) {
-                var result = await signInController.signIn(user);
-                EasyLoading.dismiss();
-                if (result == 'true') {
-                  Navigator.popAndPushNamed(context, '/success');
+                if (validateEmail(_textControllerEmail.text) &&
+                    validatePassword(_textControllerPassword.text)) {
+                  var result = await signInController.signIn(user);
+                  EasyLoading.dismiss();
+                  if (result == 'true') {
+                    Navigator.popAndPushNamed(context, '/success');
+                  } else {
+                    var snackBar =
+                        snackBarNotification(Labels.something_went_wrong);
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  }
                 } else {
-                  const snackBar = SnackBar(
-                    content: Text('Error, datos no validos.'),
-                  );
+                  var snackBar =
+                      snackBarNotification(Labels.password_or_email_incorrect);
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 }
-              }
-              else{
-                final snackBar = SnackBar(
-                    content: const Text('Las contraseñas no coinciden.'),
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              } else {
+                var snackBar = snackBarNotification(Labels.passwor_dont_match);
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
               }
             } catch (e) {
               print(e);
