@@ -18,4 +18,9 @@ class Labels{
   static const String what_do_you_want_to_do = 'What do you want to do?'; 
   static const String adopt = 'Adopt'; 
   static const String give_up_for_adoption = 'Give up \n for adoption'; 
+  static const String pet_data = 'Pet data'; 
+  static const String hint_text_pet_name = 'Ex. Axel'; 
+  static const String name = 'Name'; 
+  static const String race = 'Race'; 
+  static const String date_of_birth = 'Date of Birth'; 
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:petfind/Home/ui/screen/home_main.dart';
 import 'package:petfind/Login/ui/screen/login.dart';
 import 'package:petfind/Register/ui/screen/sign_up.dart';
+import 'package:petfind/RegisterPet/ui/screen/pet_data_register.dart';
 import 'package:petfind/RegisterPet/ui/screen/register_pet_main.dart';
 
 
@@ -43,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: RegisterPetView(),
+      body: PetDataRegister(),
      );
   }
 }
