@@ -28,4 +28,7 @@ class Labels {
   static const String petImages = 'Pet images';
   static const String beSureToUpload =
       """Be sure to upload a clear image so that those interested can appreciate the beauty of your future pet.""";
+  static const String passwor_dont_match = 'Password do not match'; 
+  static const String password_or_email_incorrect = 'Password or Email are not correct.'; 
+  static const String something_went_wrong = 'Something went wrong, try again.'; 
 }

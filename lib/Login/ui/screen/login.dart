@@ -14,7 +14,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   var loginController = LoginController(LoginApiRepository());
-  TextEditingController _textControllerEmail = TextEditingController(text: "");
+  TextEditingController _textControllerUser = TextEditingController(text: "");
   TextEditingController _textControllerPassword =
       TextEditingController(text: "");
   bool _passwordVisible = false;
@@ -51,7 +51,7 @@ class _LoginState extends State<Login> {
                             fontSize: 40),
                       ),
                     ),
-                    InputUser(textControllerEmail: _textControllerEmail),
+                    InputUser(textControllerUser: _textControllerUser),
                     Container(
                       margin: const EdgeInsets.symmetric(
                           vertical: 10, horizontal: 20),
@@ -71,7 +71,7 @@ class _LoginState extends State<Login> {
                           TextField(
                             controller: _textControllerPassword,
                             style: (const TextStyle(
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontWeight: FontWeight.w400)),
                             obscureText: _passwordVisible,
                             cursorColor: Colors.white,
@@ -105,7 +105,7 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     LoginBtn(
-                        textControllerEmail: _textControllerEmail,
+                        textControllerEmail: _textControllerUser,
                         textControllerPassword: _textControllerPassword,
                         loginController: loginController),
                     const Center(

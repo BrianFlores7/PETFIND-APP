@@ -24,28 +24,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Chau Philomene One',
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => Login(),
+        '/register_page': (context) => CreateAccount(),
+        '/success': (context) => HomeView(),
+      },
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: PetImageRegister(),
-     );
   }
 }

@@ -5,7 +5,7 @@ import '../model/sign_in.dart';
 import 'register_repository.dart';
 
 class RegisterApiRepository implements RegisterRepository {
-  static const String URL = "";
+  static const String URL = "http://10.0.2.2:3000/api/register";
   String token = "";
 
   @override
@@ -15,7 +15,7 @@ class RegisterApiRepository implements RegisterRepository {
     Map data = {
       'email': user.email,
       'password': user.password,
-      'phone': user.phone
+      'username': user.user
     };
 
     String jsonObject = json.encode(data);
@@ -29,11 +29,8 @@ class RegisterApiRepository implements RegisterRepository {
             body: jsonObject)
         .then(
       (value) async {
-        if (value.statusCode.toString() == '201') {
-          return result = "true";
-        } else if (value.statusCode.toString() == '401') {
-          token = await getToken();
-          signInUser(user);
+        var status = jsonDecode(value.body);
+        if (status['status'] != 'error') {
           return result = "true";
         }
       },
