@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:petfind/Labels/labels.dart';
+import 'package:petfind/RegisterPet/ui/widget/continue_button_pet_Register.dart';
 import 'package:petfind/colors/colors_views.dart';
 import 'package:intl/intl.dart';
 
@@ -181,6 +182,11 @@ class _PetDataRegisterState extends State<PetDataRegister> {
                       },
                     ),
                   ),
+                  RegisterPetBtn(
+                    textControllerName: _textControllerPetName,
+                    textControllerRace: _textControllerPetRace,
+                    textControllerDateOfBirth: dateinput,
+                  )
                 ],
               ),
             ),
