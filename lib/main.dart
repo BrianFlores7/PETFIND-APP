@@ -29,6 +29,9 @@ class MyApp extends StatelessWidget {
         '/': (context) => Login(),
         '/register_page': (context) => CreateAccount(),
         '/success': (context) => HomeView(),
+        '/registerPet': (context) => RegisterPetView(),
+        '/registerPetData': (context) => PetDataRegister(),
+        '/petRegisterImage': (context) => PetImageRegister(),
       },
     );
   }

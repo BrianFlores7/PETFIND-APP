@@ -30,7 +30,7 @@ class RegisterPetBtn extends StatelessWidget {
           btnText: Labels.continueText,
           color: ColorsViews.pink_word,
           onPressed: () async {
-            
+            Navigator.pushNamed(context, '/petRegisterImage');
           },
         ),
       ),

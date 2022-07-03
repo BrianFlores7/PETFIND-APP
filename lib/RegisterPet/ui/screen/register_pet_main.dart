@@ -107,7 +107,7 @@ class _RegisterPetView extends State<RegisterPetView> {
               curve: Curves.decelerate,
             );
           } else {
-            Navigator.pushNamed(context, '/login');
+            Navigator.pushNamed(context, '/registerPetData');
           }
         },
         child: Text(
