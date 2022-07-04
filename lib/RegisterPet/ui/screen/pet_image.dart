@@ -6,6 +6,7 @@ import 'package:petfind/Labels/labels.dart';
 import 'package:petfind/RegisterPet/ui/widget/continue_button_pet_Register.dart';
 import 'package:petfind/colors/colors_views.dart';
 import 'package:intl/intl.dart';
+import 'package:petfind/components/rounded_btn.dart';
 
 class PetImageRegister extends StatefulWidget {
   const PetImageRegister({Key? key}) : super(key: key);
@@ -17,10 +18,13 @@ class PetImageRegister extends StatefulWidget {
 class _PetImageRegisterState extends State<PetImageRegister> {
   var imageFile;
   var listImagePath = [];
+  List<SizedBox> listImage = [];
+
   // var loginController = LoginController(LoginApiRepository());
   TextEditingController dateinput = TextEditingController();
   TextEditingController _textControllerPetName =
       TextEditingController(text: "");
+
   int cantidad = 0;
   @override
   Widget build(BuildContext context) {
@@ -28,58 +32,73 @@ class _PetImageRegisterState extends State<PetImageRegister> {
     var height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(
-                left: width * 0.05,
-                right: width * 0.05,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      size: 40,
+        body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                  left: width * 0.05,
+                  right: width * 0.05,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        size: 40,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: width * 0.2,
-                    child: Image.asset('assets/LOGO_PETFIND.png'),
-                  ),
-                ],
-              ),
-            ),
-            const Text(
-              Labels.pet_data,
-              style: TextStyle(fontSize: 40),
-            ),
-            const Text(
-              Labels.petImages,
-              style: TextStyle(
-                fontSize: 30,
-                color: ColorsViews.pink_word,
-              ),
-            ),
-            SizedBox(
-              width: width * 0.8,
-              child: const Text(
-                Labels.beSureToUpload,
-                style: TextStyle(
-                  fontSize: 20,
-                  color: ColorsViews.grey_word,
+                    SizedBox(
+                      width: width * 0.2,
+                      child: Image.asset('assets/LOGO_PETFIND.png'),
+                    ),
+                  ],
                 ),
               ),
-            ),
-            _setImageView(width, height)
-          ],
+              Padding(
+                padding: EdgeInsets.only(right: width * 0.5),
+                child: Column(
+                  children: const <Widget>[
+                    Text(
+                      Labels.pet_data,
+                      style: TextStyle(fontSize: 40),
+                    ),
+                    Text(
+                      Labels.petImages,
+                      style: TextStyle(
+                        fontSize: 30,
+                        color: ColorsViews.pink_word,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                width: width * 0.8,
+                child: const Text(
+                  Labels.beSureToUpload,
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: ColorsViews.grey_word,
+                  ),
+                ),
+              ),
+              _setImageView(width, height),
+              RoundedButton(
+                btnText: Labels.continueText,
+                color: (cantidad > 0) ? ColorsViews.pink_word : Colors.grey,
+                onPressed: () async {},
+              ),
+            ],
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: ColorsViews.pink_word,
           onPressed: () {
-            _showSelectionDialog(context);
+            _showSelectionDialog(context, width);
           },
           child: Icon(Icons.camera_alt),
         ),
@@ -87,7 +106,7 @@ class _PetImageRegisterState extends State<PetImageRegister> {
     );
   }
 
-  Future<void> _showSelectionDialog(BuildContext context) {
+  Future<void> _showSelectionDialog(BuildContext context, width) {
     return showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -106,7 +125,7 @@ class _PetImageRegisterState extends State<PetImageRegister> {
                     GestureDetector(
                       child: Text("Camera"),
                       onTap: () {
-                        _openCamera(context);
+                        _openCamera(context, width);
                       },
                     )
                   ],
@@ -122,20 +141,18 @@ class _PetImageRegisterState extends State<PetImageRegister> {
       if (picture != null) {
         listImagePath.add(picture.path);
         imageFile = File(picture.path);
-        cantidad++;
       }
     });
     Navigator.of(context).pop();
   }
 
-  void _openCamera(BuildContext context) async {
+  void _openCamera(BuildContext context, width) async {
     var picker = ImagePicker();
     var picture = await picker.pickImage(source: ImageSource.camera);
     setState(() {
       if (picture != null) {
         listImagePath.add(picture.path);
         imageFile = File(picture.path);
-        cantidad++;
       }
     });
     Navigator.of(context).pop();
@@ -143,7 +160,14 @@ class _PetImageRegisterState extends State<PetImageRegister> {
 
   Widget _setImageView(width, heigth) {
     if (imageFile != null) {
-      print(listImagePath);
+      listImage.add(
+        SizedBox(
+          width: width * 0.5,
+          child: Image.file(
+            imageFile,
+          ),
+        ),
+      );
       return Padding(
         padding: EdgeInsets.only(
           top: heigth * 0.05,
@@ -155,17 +179,10 @@ class _PetImageRegisterState extends State<PetImageRegister> {
           height: heigth * 0.5,
           child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: cantidad,
+              itemCount: listImage.length,
               itemBuilder: (BuildContext context, int index) {
-                return Column(
-                  children: [
-                    SizedBox(
-                      width: width * 0.5,
-                      child: Image.file(
-                        imageFile,
-                      ),
-                    ),
-                  ],
+                return Row(
+                  children: [listImage[index]],
                 );
               }),
         ),
@@ -173,5 +190,22 @@ class _PetImageRegisterState extends State<PetImageRegister> {
     } else {
       return const Text(" ");
     }
+  }
+
+  SizedBox listRegisterImage(width, imageFile) {
+    listImage.add(
+      SizedBox(
+        width: width * 0.5,
+        child: Image.file(
+          imageFile,
+        ),
+      ),
+    );
+    return SizedBox(
+      width: width * 0.5,
+      child: Image.file(
+        imageFile,
+      ),
+    );
   }
 }

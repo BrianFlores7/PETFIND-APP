@@ -41,7 +41,7 @@ class LoginBtn extends StatelessWidget {
               var result = await loginController.login(user);
               
               EasyLoading.dismiss();
-              if (result == 'true' && validatePassword(_textControllerPassword.text)) {
+              if (result == 'true') {
                 Navigator.popAndPushNamed(context, '/success');
               } else {
                 var snackBar = snackBarNotification(Labels.password_or_email_incorrect);
