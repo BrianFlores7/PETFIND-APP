@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:petfind/Labels/labels.dart';
+import 'package:petfind/RegisterPet/ui/widget/app_bar.dart';
 import 'package:petfind/RegisterPet/ui/widget/continue_button_pet_Register.dart';
 import 'package:petfind/colors/colors_views.dart';
 import 'package:intl/intl.dart';
@@ -36,28 +37,7 @@ class _PetImageRegisterState extends State<PetImageRegister> {
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
-              Padding(
-                padding: EdgeInsets.only(
-                  left: width * 0.05,
-                  right: width * 0.05,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.arrow_back,
-                        size: 40,
-                      ),
-                    ),
-                    SizedBox(
-                      width: width * 0.2,
-                      child: Image.asset('assets/LOGO_PETFIND.png'),
-                    ),
-                  ],
-                ),
-              ),
+              AppBarRegister(width),
               Padding(
                 padding: EdgeInsets.only(right: width * 0.5),
                 child: Column(
@@ -90,7 +70,9 @@ class _PetImageRegisterState extends State<PetImageRegister> {
               RoundedButton(
                 btnText: Labels.continueText,
                 color: (cantidad > 0) ? ColorsViews.pink_word : Colors.grey,
-                onPressed: () async {},
+                onPressed: () async {
+                  Navigator.pushNamed(context, '/petDescription');
+                },
               ),
             ],
           ),

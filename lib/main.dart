@@ -4,6 +4,8 @@ import 'package:petfind/Home/ui/screen/home_main.dart';
 import 'package:petfind/Login/ui/screen/login.dart';
 import 'package:petfind/Register/ui/screen/sign_up.dart';
 import 'package:petfind/RegisterPet/ui/screen/pet_data_register.dart';
+import 'package:petfind/RegisterPet/ui/screen/pet_description.dart';
+import 'package:petfind/RegisterPet/ui/screen/pet_finished.dart';
 import 'package:petfind/RegisterPet/ui/screen/pet_image.dart';
 import 'package:petfind/RegisterPet/ui/screen/register_pet_main.dart';
 
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Chau Philomene One',
       ),
-      initialRoute: '/petRegisterImage',
+      initialRoute: '/petRegisterFinished',
       routes: {
         '/': (context) => Login(),
         '/register_page': (context) => CreateAccount(),
@@ -36,6 +38,8 @@ class MyApp extends StatelessWidget {
         '/registerPet': (context) => RegisterPetView(),
         '/registerPetData': (context) => PetDataRegister(),
         '/petRegisterImage': (context) => PetImageRegister(),
+        '/petDescription': (context) => PetDescription(),
+        '/petRegisterFinished': (context) => PetFinishedView(),
       },
     );
   }

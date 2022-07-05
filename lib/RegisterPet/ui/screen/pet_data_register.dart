@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:petfind/Labels/labels.dart';
+import 'package:petfind/RegisterPet/ui/widget/app_bar.dart';
 import 'package:petfind/RegisterPet/ui/widget/continue_button_pet_Register.dart';
 import 'package:petfind/colors/colors_views.dart';
 import 'package:intl/intl.dart';
@@ -33,28 +34,7 @@ class _PetDataRegisterState extends State<PetDataRegister> {
       child: Scaffold(
         body: Column(
           children: [
-            Padding(
-              padding: EdgeInsets.only(
-                left: width * 0.05,
-                right: width * 0.05,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      size: 40,
-                    ),
-                  ),
-                  SizedBox(
-                    width: width * 0.2,
-                    child: Image.asset('assets/LOGO_PETFIND.png'),
-                  ),
-                ],
-              ),
-            ),
+            AppBarRegister(width),
             const Text(
               Labels.pet_data,
               style: TextStyle(fontSize: 40),
