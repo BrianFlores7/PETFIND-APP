@@ -31,4 +31,8 @@ class Labels {
   static const String passwor_dont_match = 'Password do not match'; 
   static const String password_or_email_incorrect = 'Password or Email are not correct.'; 
   static const String something_went_wrong = 'Something went wrong, try again.'; 
+  static const String description = 'Description.'; 
+  static const String youreDone = 'You are done!'; 
+  static const String descriptionLarge = 'Write a brief description of your pet that helps other people to know it a little better.'; 
+  static const String registerDone = '!! Congratulations!! The registration of your pet has been completed, now everyone will be able to see it and as soon as someone is interested we will let you know.'; 
 }
