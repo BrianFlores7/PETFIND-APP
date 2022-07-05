@@ -32,7 +32,7 @@ class CardGiveUpAdopt extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.only(
-                left: width * 0.2,
+                left: width * 0.1,
               ),
               child: const Text(
                 Labels.give_up_for_adoption,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:petfind/Home/ui/screen/home_catalog.dart';
+import 'package:petfind/Home/ui/screen/home_catalog.dart';
 import 'package:petfind/Home/ui/screen/home_main.dart';
 import 'package:petfind/Login/ui/screen/login.dart';
 import 'package:petfind/Register/ui/screen/sign_up.dart';
@@ -30,16 +32,17 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Chau Philomene One',
       ),
-      initialRoute: '/petRegisterFinished',
+      initialRoute: '/homeCatalog',
       routes: {
         '/': (context) => Login(),
         '/register_page': (context) => CreateAccount(),
-        '/success': (context) => HomeView(),
-        '/registerPet': (context) => RegisterPetView(),
-        '/registerPetData': (context) => PetDataRegister(),
-        '/petRegisterImage': (context) => PetImageRegister(),
+        '/success': (context) => const HomeView(),
+        '/registerPet': (context) => const RegisterPetView(),
+        '/registerPetData': (context) => const PetDataRegister(),
+        '/petRegisterImage': (context) => const PetImageRegister(),
         '/petDescription': (context) => PetDescription(),
-        '/petRegisterFinished': (context) => PetFinishedView(),
+        '/petRegisterFinished': (context) => const PetFinishedView(),
+        '/homeCatalog': (context) => const PetCatalogView(),
       },
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:petfind/Labels/labels.dart';
-import 'package:petfind/RegisterPet/ui/widget/app_bar.dart';
+import 'package:petfind/components/app_bar.dart';
 import 'package:petfind/RegisterPet/ui/widget/header_text.dart';
 import 'package:petfind/colors/colors_views.dart';
 import 'package:petfind/components/rounded_btn.dart';

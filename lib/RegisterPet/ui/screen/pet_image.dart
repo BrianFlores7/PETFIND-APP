@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:petfind/Labels/labels.dart';
-import 'package:petfind/RegisterPet/ui/widget/app_bar.dart';
+import 'package:petfind/components/app_bar.dart';
 import 'package:petfind/RegisterPet/ui/widget/continue_button_pet_Register.dart';
 import 'package:petfind/colors/colors_views.dart';
 import 'package:intl/intl.dart';
