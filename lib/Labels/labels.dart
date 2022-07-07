@@ -20,12 +20,16 @@ class Labels {
   static const String adopt = 'Adopt';
   static const String give_up_for_adoption = 'Give up \n for adoption';
   static const String pet_data = 'Pet data';
+  static const String your_data = 'Your data';
+  static const String suburb = 'Suburb';
+  static const String address = 'Address';
   static const String hint_text_pet_name = 'Ex. Axel';
   static const String name = 'Name';
   static const String race = 'Race';
   static const String date_of_birth = 'Date of Birth';
   static const String continueText = 'Continue';
   static const String petImages = 'Pet images';
+  static const String postal_code = 'CP';
   static const String beSureToUpload =
       """Be sure to upload a clear image so that those interested can appreciate the beauty of your future pet.""";
   static const String passwor_dont_match = 'Password do not match'; 

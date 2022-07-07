@@ -3,9 +3,17 @@ class Pet {
   String race;
   String birthDate;
   String gender;
-  String petImage;
+  List<String> petImage;
   String owner;
+  String description;
 
-  Pet(this.name, this.race, this.birthDate, this.gender, this.petImage,
-      this.owner);
+  Pet(
+    this.name,
+    this.race,
+    this.birthDate,
+    this.gender,
+    this.petImage,
+    this.owner,
+    this.description,
+  );
 }

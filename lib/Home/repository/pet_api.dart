@@ -12,8 +12,12 @@ class ListPetRepository implements Repository {
       'Chihuahua',
       '6 años',
       'M',
-      'https://www.advancedsciencenews.com/wp-content/uploads/2022/05/sniffer-dog-covid-19.png',
+      [
+        'https://www.advancedsciencenews.com/wp-content/uploads/2022/05/sniffer-dog-covid-19.png',
+        'https://www.advancedsciencenews.com/wp-content/uploads/2022/05/sniffer-dog-covid-19.png',
+      ],
       'Brian',
+      'Descripcion malota'
     );
     for (var i = 0; i < 6; i++) {
       listPets.add(pet);

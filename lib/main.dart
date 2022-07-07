@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:petfind/AdoptForm/ui/screen/add_home_pet.dart';
+import 'package:petfind/AdoptForm/ui/screen/add_ine_photo.dart';
+import 'package:petfind/AdoptForm/ui/screen/adopt_done.dart';
+import 'package:petfind/AdoptForm/ui/screen/pet_adopt_form.dart';
+import 'package:petfind/Home/ui/screen/detail_pet.dart';
 import 'package:petfind/Home/ui/screen/home_catalog.dart';
 import 'package:petfind/Home/ui/screen/home_catalog.dart';
 import 'package:petfind/Home/ui/screen/home_main.dart';
@@ -32,7 +37,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Chau Philomene One',
       ),
-      initialRoute: '/homeCatalog',
+      initialRoute: '/adoptDone',
       routes: {
         '/': (context) => Login(),
         '/register_page': (context) => CreateAccount(),
@@ -42,7 +47,11 @@ class MyApp extends StatelessWidget {
         '/petRegisterImage': (context) => const PetImageRegister(),
         '/petDescription': (context) => PetDescription(),
         '/petRegisterFinished': (context) => const PetFinishedView(),
+        '/adoptDone': (context) => const PetFinishedAdoptView(),
         '/homeCatalog': (context) => const PetCatalogView(),
+        '/petAdoptForm': (context) => const PetAdoptForm(),
+        '/ownerINEForm': (context) => const IneOwnerRegister(),
+        '/homePetAdoptForm': (context) => const HomePetAdoptRegister(),
       },
     );
   }

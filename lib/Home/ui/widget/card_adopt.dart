@@ -15,31 +15,36 @@ class CardAdopt extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      margin: EdgeInsets.all(15),
-      elevation: 10,
-      child: Row(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(
-              left: width * 0.07,
-            ),
-            child: const Text(
-              Labels.adopt,
-              style: TextStyle(
-                color: ColorsViews.pink_word,
-                fontSize: 35,
+    return InkWell(
+      onTap: (){
+        Navigator.pushNamed(context, '/homeCatalog');
+      },
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        margin: EdgeInsets.all(15),
+        elevation: 10,
+        child: Row(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(
+                left: width * 0.07,
+              ),
+              child: const Text(
+                Labels.adopt,
+                style: TextStyle(
+                  color: ColorsViews.pink_word,
+                  fontSize: 35,
+                ),
               ),
             ),
-          ),
-          SizedBox(
-            width: width * 0.25,
-            height: height * 0.25,
-          )
-        ],
+            SizedBox(
+              width: width * 0.25,
+              height: height * 0.25,
+            )
+          ],
+        ),
       ),
     );
   }

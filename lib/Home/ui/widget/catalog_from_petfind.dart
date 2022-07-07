@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petfind/Home/ui/screen/detail_pet.dart';
 import 'package:petfind/colors/colors_views.dart';
 import 'package:petfind/model/pet_model.dart';
 
@@ -14,7 +15,12 @@ class CardCatalogPetFind extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        print(listPets!.name);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailPetView(pet: listPets),
+          ),
+        );
       },
       child: Card(
         // Con esta propiedad modificamos la forma de nuestro card
@@ -37,7 +43,7 @@ class CardCatalogPetFind extends StatelessWidget {
             SizedBox(
               width: 100,
               height: 100,
-              child: Image.network(listPets!.petImage),
+              child: Image.network(listPets!.petImage[0]),
             ),
             Column(
               children: [

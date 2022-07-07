@@ -101,7 +101,7 @@ class _PetCatalogViewState extends State<PetCatalogView>
                               var listPets = snapshot.data?[index];
                               return Column(
                                 children: [
-                                  CardCatalogPetFind(listPets: listPets),
+                                  CardCatalogPetFind(listPets: listPets,),
                                 ],
                               );
                             },
