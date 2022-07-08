@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Chau Philomene One',
       ),
-      initialRoute: '/adoptDone',
+      initialRoute: '/registerPetData',
       routes: {
         '/': (context) => Login(),
         '/register_page': (context) => CreateAccount(),
