@@ -40,21 +40,25 @@ class _DetailPetView extends State<DetailPetView> {
                         pagePosition = value;
                       })
                     },
-                    itemBuilder: (context, index) => ContainerBoarding(
-                      image: pet.petImage[index],
+                    itemBuilder: (context, index) => SizedBox(
+                      height: height * 0.2,
+                      child: ContainerBoarding(
+                        image: pet.petImage,
+                      ),
                     ),
-                    itemCount: pet.petImage.length,
+                    // itemCount: pet.petImage.length,
                   ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
-                    pet.petImage.length,
+                    // pet.petImage.length,
+                    1,
                     (index) => _animatedContainer(index),
                   ),
                 ),
                 Divider(
-                  height: height * 0.05,
+                  height: height * 0.02,
                 ),
                 Padding(
                   padding: EdgeInsets.only(right: width * 0.7),
@@ -73,13 +77,13 @@ class _DetailPetView extends State<DetailPetView> {
                     Text(pet.birthDate),
                     Text("Gender: ${pet.gender}"),
                     Icon(Icons.person),
-                    Text(pet.owner),
+                    // Text(pet.owner),
                   ],
                 ),
                 Padding(
                   padding: EdgeInsets.all(height * 0.03),
                   child: Text(
-                    'Consectetur ea in aliqua commodo eiusmod adipisicing pariatur aliqua ipsum. Voluptate minim laboris deserunt minim cillum pariatur eu id. Excepteur elit eiusmod ad veniam qui exercitation cupidatat anim. Excepteur deserunt aliqua labore excepteur irure et deserunt cupidatat labore enim esse.',
+                    pet.description,
                     style: TextStyle(fontSize: 15),
                   ),
                 ),
@@ -87,7 +91,7 @@ class _DetailPetView extends State<DetailPetView> {
                     color: ColorsViews.pink_word,
                     btnText: 'Adopt',
                     onPressed: () {
-                      Navigator.pushNamed(context, '/petAdoptForm');
+                      Navigator.pushNamed(context, '/adoptDone');
                     })
               ],
             ),

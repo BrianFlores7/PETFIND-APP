@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:petfind/Labels/labels.dart';
+import 'package:petfind/Register/ui/screen/pet_adopt_form.dart';
 import 'package:petfind/Register/ui/widget/logo_sign_up.dart';
 import 'package:petfind/Register/ui/widget/sign_up_text.dart';
 import 'package:petfind/colors/colors_views.dart';
 import 'package:petfind/components/input_email.dart';
 import 'package:petfind/components/input_user.dart';
+import 'package:petfind/components/rounded_btn.dart';
+import 'package:petfind/components/snack_bar_notification.dart';
+import '../../model/sign_in.dart';
 import '../../repository/register_api.dart';
 import '../../repository/register_controller.dart';
 import '../widget/go_back_button.dart';
@@ -38,7 +42,6 @@ class _CreateAccountState extends State<CreateAccount> {
           elevation: 0,
           leading: goBackButton(context),
           backgroundColor: Colors.white),
-      
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -57,12 +60,34 @@ class _CreateAccountState extends State<CreateAccount> {
                   passwordField(),
                   confirmPasswordField(),
                   InputEmail(textControllerEmail: _textControllerEmail),
-                  registerBtn(
-                    textControllerEmail: _textControllerEmail,
-                    textControllerPassword: _textControllerPassword,
-                    textControllerConfirmPassword: _textControllerPasswordConfirm,
-                    textControllerUser: _textControllerUser,
-                    signInController: signInController,
+                  Center(
+                    child: RoundedButton(
+                        color: ColorsViews.pink_word,
+                        btnText: 'Continue',
+                        onPressed: () {
+                          try {
+                            if (_textControllerPasswordConfirm.text ==
+                                    _textControllerPassword.text &&
+                                _textControllerPassword.text != '') {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PetAdoptForm(
+                                    textControllerEmail: _textControllerEmail,
+                                    textControllerPassword:
+                                        _textControllerPassword,
+                                    textControllerUser: _textControllerUser,
+                                    signInController: signInController,
+                                  ),
+                                ),
+                              );
+                            } else {
+                              snackBarNotification('Password doesnt match');
+                            }
+                          } catch (e) {
+                            print(e.toString());
+                          }
+                        }),
                   ),
                   const If_have_account()
                 ],

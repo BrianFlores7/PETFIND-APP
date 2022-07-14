@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:petfind/Labels/labels.dart';
+import 'package:petfind/RegisterPet/ui/widget/header_text.dart';
 import 'package:petfind/components/app_bar.dart';
 import 'package:petfind/RegisterPet/ui/widget/continue_button_pet_Register.dart';
 import 'package:petfind/colors/colors_views.dart';
@@ -18,6 +19,8 @@ class _PetDataRegisterState extends State<PetDataRegister> {
   TextEditingController _textControllerPetName =
       TextEditingController(text: "");
   TextEditingController _textControllerPetRace =
+      TextEditingController(text: "");
+  TextEditingController _textControllerPetDescription =
       TextEditingController(text: "");
   final gender = ['Macho', 'Hembra'];
 
@@ -80,10 +83,10 @@ class _PetDataRegisterState extends State<PetDataRegister> {
                           TextField(
                             controller: _textControllerPetName,
                             style: (const TextStyle(
-                              color: Colors.white,
+                              color: Colors.black,
                               fontWeight: FontWeight.w400,
                             )),
-                            cursorColor: Colors.white,
+                            cursorColor: Colors.black,
                             decoration: const InputDecoration(
                               hintText: Labels.hint_text_pet_name,
                             ),
@@ -106,10 +109,10 @@ class _PetDataRegisterState extends State<PetDataRegister> {
                           TextField(
                             controller: _textControllerPetRace,
                             style: (const TextStyle(
-                              color: Colors.white,
+                              color: Colors.black,
                               fontWeight: FontWeight.w400,
                             )),
-                            cursorColor: Colors.white,
+                            cursorColor: Colors.black,
                           ),
                         ],
                       ),
@@ -132,7 +135,7 @@ class _PetDataRegisterState extends State<PetDataRegister> {
                       child: SizedBox(
                         width: width * 0.5,
                         child: DropdownButton(
-                          isExpanded: true,
+                            isExpanded: true,
                             items: gender.map(buildMenuItem).toList(),
                             value: value,
                             onChanged: (value) {
@@ -192,10 +195,35 @@ class _PetDataRegisterState extends State<PetDataRegister> {
                         },
                       ),
                     ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 20),
+                      child: const Text(
+                        'Description',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            color: ColorsViews.pink_word),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(
+                          right: width * 0.05, left: width * 0.05),
+                      child: TextField(
+                        controller: _textControllerPetDescription,
+                        style: (const TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w400,
+                        )),
+                        cursorColor: Colors.black,
+                      ),
+                    ),
                     RegisterPetBtn(
                       textControllerName: _textControllerPetName,
                       textControllerRace: _textControllerPetRace,
                       textControllerDateOfBirth: dateinput,
+                      textControllerGender: value,
+                      textControllerPetDescription: _textControllerPetDescription,
                     )
                   ],
                 ),

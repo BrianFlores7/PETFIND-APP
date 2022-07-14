@@ -1,11 +1,12 @@
 class Pet {
-  String name;
-  String race;
-  String birthDate;
-  String gender;
-  List<String> petImage;
-  String owner;
-  String description;
+  late String name;
+  late String race;
+  late String birthDate;
+  late String gender;
+  // late List<String> petImage;
+  late String petImage;
+  late String owner;
+  late String description;
 
   Pet(
     this.name,
@@ -16,4 +17,12 @@ class Pet {
     this.owner,
     this.description,
   );
+    Pet.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    race = json['race'];
+    birthDate = json['birthdate'];
+    gender = json['gender'];
+    description = json['description'];
+    petImage = json['image_url'];
+  }
 }

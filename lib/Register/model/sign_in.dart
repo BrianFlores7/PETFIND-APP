@@ -2,20 +2,31 @@ class SignInModel {
   String? email;
   String? password;
   String? user;
+  String? name;
+  String? address;
+  String? colonia;
+  String? postal_code;
+  String? phone;
 
-  SignInModel(this.email, this.password, this.user);
+  SignInModel(
+    this.email,
+    this.password,
+    this.user,
+    this.name,
+    this.address,
+    this.colonia,
+    this.postal_code,
+    this.phone,
+  );
 
   SignInModel.fromJson(Map<String, dynamic> json) {
     email = json['email'];
     password = json['password'];
     user = json['username'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['email'] = email;
-    data['password'] = password;
-    data['username'] = user;
-    return data;
+    name = json['name'];
+    address = json['address'];
+    colonia = json['colonia'];
+    postal_code = json['codigo_postal'];
+    phone = json['phone'];
   }
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:petfind/AdoptForm/ui/screen/add_home_pet.dart';
-import 'package:petfind/AdoptForm/ui/screen/add_ine_photo.dart';
+import 'package:petfind/Register/ui/screen/add_ine_photo.dart';
 import 'package:petfind/AdoptForm/ui/screen/adopt_done.dart';
-import 'package:petfind/AdoptForm/ui/screen/pet_adopt_form.dart';
+import 'package:petfind/Register/ui/screen/pet_adopt_form.dart';
 import 'package:petfind/Home/ui/screen/detail_pet.dart';
 import 'package:petfind/Home/ui/screen/home_catalog.dart';
 import 'package:petfind/Home/ui/screen/home_catalog.dart';
@@ -15,6 +15,9 @@ import 'package:petfind/RegisterPet/ui/screen/pet_description.dart';
 import 'package:petfind/RegisterPet/ui/screen/pet_finished.dart';
 import 'package:petfind/RegisterPet/ui/screen/pet_image.dart';
 import 'package:petfind/RegisterPet/ui/screen/register_pet_main.dart';
+import 'package:petfind/SolicitudState/ui/screen/accepted_solicitud.dart';
+import 'package:petfind/SolicitudState/ui/screen/denied_solicitud.dart';
+import 'package:petfind/SolicitudState/ui/screen/waiting_solicitud.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,7 +40,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Chau Philomene One',
       ),
-      initialRoute: '/registerPetData',
+      initialRoute: '/success',
       routes: {
         '/': (context) => Login(),
         '/register_page': (context) => CreateAccount(),
@@ -49,9 +52,10 @@ class MyApp extends StatelessWidget {
         '/petRegisterFinished': (context) => const PetFinishedView(),
         '/adoptDone': (context) => const PetFinishedAdoptView(),
         '/homeCatalog': (context) => const PetCatalogView(),
-        '/petAdoptForm': (context) => const PetAdoptForm(),
-        '/ownerINEForm': (context) => const IneOwnerRegister(),
         '/homePetAdoptForm': (context) => const HomePetAdoptRegister(),
+        '/acceptRequest': (context) => const  AcceptSolicitud(),
+        '/deniedRequest': (context) => const DeniedSolicitud(),
+        '/waitingRequest': (context) => const WaitingSolicitud(),
       },
     );
   }

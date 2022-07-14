@@ -5,9 +5,11 @@ class AppBarHome extends StatelessWidget {
   const AppBarHome({
     Key? key,
     required this.width,
+    required this.scaffoldKey
   }) : super(key: key);
 
   final double width;
+  final scaffoldKey;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class AppBarHome extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {scaffoldKey.currentState.openDrawer();},
             icon: const Icon(
               Icons.menu_sharp,
               size: 40,

@@ -9,24 +9,37 @@ import '../../repository/register_controller.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class registerBtn extends StatelessWidget {
-  const registerBtn({
+  registerBtn({
     Key? key,
     required TextEditingController textControllerEmail,
     required TextEditingController textControllerPassword,
     required TextEditingController textControllerUser,
     required this.signInController,
-    required TextEditingController textControllerConfirmPassword,
+    required TextEditingController textControllerOwnerName,
+    required TextEditingController textControllerOwnerAddress,
+    required TextEditingController textControllerOwnerSuburb,
+    required TextEditingController textControllerOwnerCP,
+    required TextEditingController textControllerOwnerPhone,
   })  : _textControllerEmail = textControllerEmail,
         _textControllerPassword = textControllerPassword,
         _textControllerUser = textControllerUser,
-        _textControllerConfirmPassword = textControllerConfirmPassword,
+        _textControllerOwnerName = textControllerOwnerName,
+        _textControllerOwnerAddress = textControllerOwnerAddress,
+        _textControllerOwnerSuburb = textControllerOwnerSuburb,
+        _textControllerOwnerCP = textControllerOwnerCP,
+        _textControllerOwnerPhone = textControllerOwnerPhone,
         super(key: key);
 
   final TextEditingController _textControllerEmail;
   final TextEditingController _textControllerPassword;
   final TextEditingController _textControllerUser;
-  final TextEditingController _textControllerConfirmPassword;
   final RegisterController signInController;
+  final TextEditingController dateinput = TextEditingController();
+  final TextEditingController _textControllerOwnerName;
+  final TextEditingController _textControllerOwnerAddress;
+  final TextEditingController _textControllerOwnerSuburb;
+  final TextEditingController _textControllerOwnerCP;
+  final TextEditingController _textControllerOwnerPhone;
 
   @override
   Widget build(BuildContext context) {
@@ -38,31 +51,35 @@ class registerBtn extends StatelessWidget {
           color: ColorsViews.pink_word,
           onPressed: () async {
             try {
-              EasyLoading.show(status: 'Cargando...');
-              SignInModel user = SignInModel(_textControllerEmail.text,
-                  _textControllerPassword.text, _textControllerUser.text);
-              if (_textControllerConfirmPassword.text ==
-                  _textControllerPassword.text) {
-                if (validateEmail(_textControllerEmail.text) &&
-                    validatePassword(_textControllerPassword.text)) {
-                  var result = await signInController.signIn(user);
-                  EasyLoading.dismiss();
-                  if (result == 'true') {
-                    Navigator.popAndPushNamed(context, '/success');
-                  } else {
-                    var snackBar =
-                        snackBarNotification(Labels.something_went_wrong);
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  }
-                } else {
-                  var snackBar =
-                      snackBarNotification(Labels.password_or_email_incorrect);
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                }
-              } else {
-                var snackBar = snackBarNotification(Labels.passwor_dont_match);
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              }
+              // EasyLoading.show(status: 'Cargando...');
+              SignInModel user = SignInModel(
+                _textControllerEmail.text,
+                _textControllerPassword.text,
+                _textControllerUser.text,
+                _textControllerOwnerName.text,
+                _textControllerOwnerAddress.text,
+                _textControllerOwnerSuburb.text,
+                _textControllerOwnerCP.text,
+                _textControllerOwnerPhone.text,
+              );
+              print(user);
+
+              // if (validateEmail(_textControllerEmail.text) &&
+              //     validatePassword(_textControllerPassword.text)) {
+              //   var result = await signInController.signIn(user);
+              //   EasyLoading.dismiss();
+              //   if (result == 'true') {
+              //     Navigator.popAndPushNamed(context, '/success');
+              //   } else {
+              //     var snackBar =
+              //         snackBarNotification(Labels.something_went_wrong);
+              //     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              //   }
+              // } else {
+              //   var snackBar =
+              //       snackBarNotification(Labels.password_or_email_incorrect);
+              //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              // }
             } catch (e) {
               print(e);
             }

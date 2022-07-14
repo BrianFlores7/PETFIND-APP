@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:petfind/AdoptForm/ui/widget/register_adopt_owner.dart';
 import 'package:petfind/Labels/labels.dart';
+import 'package:petfind/Register/ui/widget/register_btn.dart';
 import 'package:petfind/components/app_bar.dart';
 import 'package:petfind/colors/colors_views.dart';
 import 'package:intl/intl.dart';
 
 class PetAdoptForm extends StatefulWidget {
-  const PetAdoptForm({Key? key}) : super(key: key);
+  final TextEditingController textControllerEmail;
+  final TextEditingController textControllerPassword;
+  final TextEditingController textControllerUser;
+  final signInController;
+  const PetAdoptForm({
+    Key? key,
+    required this.textControllerEmail,
+    required this.textControllerPassword,
+    required this.textControllerUser,
+    required this.signInController,
+  }) : super(key: key);
 
   @override
   State<PetAdoptForm> createState() => _PetAdoptFormState();
@@ -22,6 +33,8 @@ class _PetAdoptFormState extends State<PetAdoptForm> {
   TextEditingController _textControllerOwnerSuburb =
       TextEditingController(text: "");
   TextEditingController _textControllerOwnerCP =
+      TextEditingController(text: "");
+  TextEditingController _textControllerOwnerPhone =
       TextEditingController(text: "");
 
   @override
@@ -46,7 +59,8 @@ class _PetAdoptFormState extends State<PetAdoptForm> {
                 style: TextStyle(fontSize: 40),
               ),
               Padding(
-                padding: EdgeInsets.only(left: width * 0.05, right: width * 0.05),
+                padding:
+                    EdgeInsets.only(left: width * 0.05, right: width * 0.05),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,10 +84,10 @@ class _PetAdoptFormState extends State<PetAdoptForm> {
                           TextField(
                             controller: _textControllerOwnerName,
                             style: (const TextStyle(
-                              color: Colors.white,
+                              color: Colors.black,
                               fontWeight: FontWeight.w400,
                             )),
-                            cursorColor: Colors.white,
+                            cursorColor: Colors.black,
                             decoration: const InputDecoration(
                               hintText: Labels.hint_text_pet_name,
                             ),
@@ -100,10 +114,10 @@ class _PetAdoptFormState extends State<PetAdoptForm> {
                           TextField(
                             controller: _textControllerOwnerAddress,
                             style: (const TextStyle(
-                              color: Colors.white,
+                              color: Colors.black,
                               fontWeight: FontWeight.w400,
                             )),
-                            cursorColor: Colors.white,
+                            cursorColor: Colors.black,
                           ),
                         ],
                       ),
@@ -127,10 +141,10 @@ class _PetAdoptFormState extends State<PetAdoptForm> {
                           TextField(
                             controller: _textControllerOwnerSuburb,
                             style: (const TextStyle(
-                              color: Colors.white,
+                              color: Colors.black,
                               fontWeight: FontWeight.w400,
                             )),
-                            cursorColor: Colors.white,
+                            cursorColor: Colors.black,
                           ),
                         ],
                       ),
@@ -154,20 +168,25 @@ class _PetAdoptFormState extends State<PetAdoptForm> {
                           TextField(
                             controller: _textControllerOwnerCP,
                             style: (const TextStyle(
-                              color: Colors.white,
+                              color: Colors.black,
                               fontWeight: FontWeight.w400,
                             )),
-                            cursorColor: Colors.white,
+                            cursorColor: Colors.black,
                             keyboardType: TextInputType.number,
                           ),
                         ],
                       ),
                     ),
-                    RegisterAdoptOwnerBtn(
+                    registerBtn(
+                      textControllerEmail: widget.textControllerEmail,
+                      textControllerPassword: widget.textControllerPassword,
+                      textControllerUser: widget.textControllerUser,
+                      signInController: widget.signInController,
                       textControllerOwnerName: _textControllerOwnerName,
                       textControllerOwnerAddress: _textControllerOwnerAddress,
                       textControllerOwnerSuburb: _textControllerOwnerSuburb,
                       textControllerOwnerCP: _textControllerOwnerCP,
+                      textControllerOwnerPhone: _textControllerOwnerPhone,
                     )
                   ],
                 ),

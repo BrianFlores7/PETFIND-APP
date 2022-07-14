@@ -4,23 +4,16 @@ import 'package:petfind/Home/repository/pet_repository.dart';
 import 'package:petfind/model/pet_model.dart';
 
 class ListPetRepository implements Repository {
+  static const String URL = "http://10.0.2.2:8000/get_all";
+  Uri url = Uri.parse(URL);
   @override
   Future<List<Pet>> getPetList() async {
     List<Pet> listPets = [];
-    Pet pet = Pet(
-      'Boby',
-      'Chihuahua',
-      '6 años',
-      'M',
-      [
-        'https://www.advancedsciencenews.com/wp-content/uploads/2022/05/sniffer-dog-covid-19.png',
-        'https://www.advancedsciencenews.com/wp-content/uploads/2022/05/sniffer-dog-covid-19.png',
-      ],
-      'Brian',
-      'Descripcion malota'
-    );
-    for (var i = 0; i < 6; i++) {
-      listPets.add(pet);
+
+    final respuesta = await http.get(url);
+    var info = json.decode(respuesta.body);
+    for (var item = 0; item < info.length; item++) {
+      listPets.add(Pet.fromJson(info[item]));
     }
     return listPets;
   }

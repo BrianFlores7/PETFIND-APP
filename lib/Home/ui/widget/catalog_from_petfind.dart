@@ -43,7 +43,7 @@ class CardCatalogPetFind extends StatelessWidget {
             SizedBox(
               width: 100,
               height: 100,
-              child: Image.network(listPets!.petImage[0]),
+              child: Image.network(listPets!.petImage),
             ),
             Column(
               children: [

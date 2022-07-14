@@ -13,11 +13,76 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+    final GlobalKey _scaffoldKey = new GlobalKey();
     return SafeArea(
       child: Scaffold(
+        key: _scaffoldKey,
+        drawer: Drawer(
+          backgroundColor: ColorsViews.pink_word,
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                    left: width * 0.1,
+                    bottom: height * 0.1,
+                    top: height * 0.05),
+                child: const Text(
+                  "Usuario",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 40,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                  left: width * 0.1,
+                  bottom: height * 0.05,
+                ),
+                child: const Text(
+                  "My adoptions",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                  left: width * 0.1,
+                  bottom: height * 0.05,
+                ),
+                child: const Text(
+                  "Requested",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                  left: width * 0.1,
+                  top: height * 0.4,
+                ),
+                child: const Text(
+                  "Log out",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
         body: Column(
           children: [
-            AppBarHome(width: width),
+            AppBarHome(
+              width: width,
+              scaffoldKey: _scaffoldKey,
+            ),
             TextHomeView(height: height, width: width),
             CardAdopt(width: width, height: height),
             CardGiveUpAdopt(width: width, height: height),
