@@ -177,6 +177,34 @@ class _PetAdoptFormState extends State<PetAdoptForm> {
                         ],
                       ),
                     ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          const Text(
+                            'Phone',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: ColorsViews.pink_word),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          TextField(
+                            controller: _textControllerOwnerPhone,
+                            style: (const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w400,
+                            )),
+                            cursorColor: Colors.black,
+                            keyboardType: TextInputType.phone,
+                          ),
+                        ],
+                      ),
+                    ),
                     registerBtn(
                       textControllerEmail: widget.textControllerEmail,
                       textControllerPassword: widget.textControllerPassword,
