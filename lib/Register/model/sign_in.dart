@@ -1,32 +1,48 @@
 class SignInModel {
-  String? email;
+  String? username;
   String? password;
-  String? user;
-  String? name;
-  String? address;
-  String? colonia;
-  String? postal_code;
+  String? email;
+  String? fullname;
+  String? direction;
+  String? colony;
+  String? postalCode;
   String? phone;
+  String? ineImageUrl;
 
   SignInModel(
-    this.email,
-    this.password,
-    this.user,
-    this.name,
-    this.address,
-    this.colonia,
-    this.postal_code,
-    this.phone,
-  );
+      this.username,
+      this.password,
+      this.email,
+      this.fullname,
+      this.direction,
+      this.colony,
+      this.postalCode,
+      this.phone,
+      this.ineImageUrl);
 
   SignInModel.fromJson(Map<String, dynamic> json) {
-    email = json['email'];
+    username = json['username'];
     password = json['password'];
-    user = json['username'];
-    name = json['name'];
-    address = json['address'];
-    colonia = json['colonia'];
-    postal_code = json['codigo_postal'];
+    email = json['email'];
+    fullname = json['fullname'];
+    direction = json['direction'];
+    colony = json['colony'];
+    postalCode = json['postal_code'];
     phone = json['phone'];
+    ineImageUrl = json['ine_image_url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['username'] = username;
+    data['password'] = password;
+    data['email'] = email;
+    data['fullname'] = fullname;
+    data['direction'] = direction;
+    data['colony'] = colony;
+    data['postal_code'] = postalCode;
+    data['phone'] = phone;
+    data['ine_image_url'] = ineImageUrl;
+    return data;
   }
 }

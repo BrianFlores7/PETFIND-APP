@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:petfind/Home/repository/pet_api.dart';
 import 'package:petfind/Home/repository/pet_controller.dart';
+import 'package:petfind/Home/ui/widget/card_catalog_facebook.dart';
 import 'package:petfind/Home/ui/widget/catalog_from_petfind.dart';
 import 'package:petfind/components/app_bar.dart';
 import 'package:petfind/model/pet_model.dart';
@@ -68,19 +69,19 @@ class _PetCatalogViewState extends State<PetCatalogView>
 
     return SafeArea(
       child: Scaffold(
-        body: FutureBuilder<List<Pet>>(
+        body: FutureBuilder<Map<String, dynamic>>(
           future: listPetController.fetchListPet(),
           builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            if (snapshot.hasError) {
-              return const Center(
-                child: Text("Error"),
-              );
-            }
+            // if (snapshot.connectionState == ConnectionState.waiting) {
+            //   return const Center(
+            //     child: CircularProgressIndicator(),
+            //   );
+            // }
+            // if (snapshot.hasError) {
+            //   return const Center(
+            //     child: Text("Error"),
+            //   );
+            // }
             return SizedBox(
               width: width,
               child: Column(
@@ -95,13 +96,27 @@ class _PetCatalogViewState extends State<PetCatalogView>
                   Expanded(
                     child: TabBarView(
                       controller: tabController,
-                      children: [
+                      children: [ 
+                        const Text(''),
+                        // ListView.separated(
+                        //     itemBuilder: (context, index) {
+                        //       var listPets = snapshot.data?[index];
+                        //       return Column(
+                        //         children: [
+                        //           CardCatalogPetFind(listPets: listPets,),
+                        //         ],
+                        //       );
+                        //     },
+                        //     separatorBuilder: (context, index) {
+                        //       return const Divider(thickness: 0.5, height: 0.5);
+                        //     },
+                        //     itemCount: snapshot.data?.length ?? 0),
                         ListView.separated(
                             itemBuilder: (context, index) {
-                              var listPets = snapshot.data?[index];
+                              var listPetsFacebook = snapshot.data?["petFromFacebook"][index];
                               return Column(
                                 children: [
-                                  CardCatalogPetFind(listPets: listPets,),
+                                  CardCatalogPetFindFacebook(listPets: listPetsFacebook,),
                                 ],
                               );
                             },
@@ -109,7 +124,6 @@ class _PetCatalogViewState extends State<PetCatalogView>
                               return const Divider(thickness: 0.5, height: 0.5);
                             },
                             itemCount: snapshot.data?.length ?? 0),
-                        const Text(''),
                       ],
                     ),
                   ),

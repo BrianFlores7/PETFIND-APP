@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:petfind/Labels/labels.dart';
+import 'package:petfind/Register/ui/screen/add_ine_photo.dart';
 import 'package:petfind/colors/colors_views.dart';
 import 'package:petfind/components/rounded_btn.dart';
-import 'package:petfind/components/snack_bar_notification.dart';
-import 'package:petfind/validations/email_password.dart';
-import '../../model/sign_in.dart';
 import '../../repository/register_controller.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class registerBtn extends StatelessWidget {
   registerBtn({
@@ -41,6 +38,7 @@ class registerBtn extends StatelessWidget {
   final TextEditingController _textControllerOwnerCP;
   final TextEditingController _textControllerOwnerPhone;
 
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -51,37 +49,24 @@ class registerBtn extends StatelessWidget {
           color: ColorsViews.pink_word,
           onPressed: () async {
             try {
-              // EasyLoading.show(status: 'Cargando...');
-              SignInModel user = SignInModel(
-                _textControllerEmail.text,
-                _textControllerPassword.text,
-                _textControllerUser.text,
-                _textControllerOwnerName.text,
-                _textControllerOwnerAddress.text,
-                _textControllerOwnerSuburb.text,
-                _textControllerOwnerCP.text,
-                _textControllerOwnerPhone.text,
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => IneOwnerRegister(
+                    _textControllerUser,
+                    _textControllerPassword,
+                    _textControllerEmail,
+                    _textControllerOwnerName,
+                    _textControllerOwnerAddress,
+                    _textControllerOwnerSuburb,
+                    _textControllerOwnerCP,
+                    _textControllerOwnerPhone,
+                    signInController,
+                  ),
+                ),
               );
-              print(user);
-
-              // if (validateEmail(_textControllerEmail.text) &&
-              //     validatePassword(_textControllerPassword.text)) {
-              //   var result = await signInController.signIn(user);
-              //   EasyLoading.dismiss();
-              //   if (result == 'true') {
-              //     Navigator.popAndPushNamed(context, '/success');
-              //   } else {
-              //     var snackBar =
-              //         snackBarNotification(Labels.something_went_wrong);
-              //     ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              //   }
-              // } else {
-              //   var snackBar =
-              //       snackBarNotification(Labels.password_or_email_incorrect);
-              //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              // }
             } catch (e) {
-              print(e);
+              print(e.toString());
             }
             // Add login code
           },

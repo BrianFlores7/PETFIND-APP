@@ -8,6 +8,7 @@ import 'package:petfind/RegisterPet/ui/widget/continue_button_pet_Register.dart'
 import 'package:petfind/colors/colors_views.dart';
 import 'package:intl/intl.dart';
 import 'package:petfind/components/rounded_btn.dart';
+import 'package:simple_s3/simple_s3.dart';
 
 class PetImageRegister extends StatefulWidget {
   const PetImageRegister({Key? key}) : super(key: key);
@@ -25,6 +26,9 @@ class _PetImageRegisterState extends State<PetImageRegister> {
   TextEditingController dateinput = TextEditingController();
   TextEditingController _textControllerPetName =
       TextEditingController(text: "");
+  SimpleS3 _simpleS3 = SimpleS3();
+  bool isLoading = false;
+  bool uploaded = false;
 
   int cantidad = 0;
   @override
@@ -71,7 +75,8 @@ class _PetImageRegisterState extends State<PetImageRegister> {
                 btnText: Labels.continueText,
                 color: (cantidad > 0) ? ColorsViews.pink_word : Colors.grey,
                 onPressed: () async {
-                  Navigator.pushNamed(context, '/petDescription');
+                  _upload(imageFile);
+                  // Navigator.pushNamed(context, '/petDescription');
                 },
               ),
             ],
@@ -123,6 +128,7 @@ class _PetImageRegisterState extends State<PetImageRegister> {
       if (picture != null) {
         listImagePath.add(picture.path);
         imageFile = File(picture.path);
+        cantidad++;
       }
     });
     Navigator.of(context).pop();
@@ -135,6 +141,7 @@ class _PetImageRegisterState extends State<PetImageRegister> {
       if (picture != null) {
         listImagePath.add(picture.path);
         imageFile = File(picture.path);
+        cantidad++;
       }
     });
     Navigator.of(context).pop();
@@ -159,14 +166,7 @@ class _PetImageRegisterState extends State<PetImageRegister> {
         child: SizedBox(
           width: width,
           height: heigth * 0.5,
-          child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: listImage.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Row(
-                  children: [listImage[index]],
-                );
-              }),
+          child: Image.file(imageFile),
         ),
       );
     } else {
@@ -189,5 +189,34 @@ class _PetImageRegisterState extends State<PetImageRegister> {
         imageFile,
       ),
     );
+  }
+
+  Future<String?> _upload(File selectedFile) async {
+    String? result;
+
+    if (result == null) {
+      try {
+        setState(() {
+          isLoading = true;
+        });
+        result = await _simpleS3.uploadFile(
+          selectedFile,
+          'bucketramsesprueba1',
+          'us-east-1:7cc6df81-3825-43b9-acb7-8ef7f3ddafb6',
+          AWSRegions.usEast1,
+          debugLog: true,
+          s3FolderPath: "test",
+          accessControl: S3AccessControl.publicRead,
+        );
+        print(result);
+        setState(() {
+          uploaded = true;
+          isLoading = false;
+        });
+      } catch (e) {
+        print(e.toString());
+      }
+    }
+    return result;
   }
 }

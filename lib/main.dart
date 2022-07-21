@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:petfind/AdoptForm/ui/screen/add_home_pet.dart';
+import 'package:petfind/Home/ui/screen/accept_request.dart';
+import 'package:petfind/Home/ui/screen/requested.dart';
 import 'package:petfind/Register/ui/screen/add_ine_photo.dart';
 import 'package:petfind/AdoptForm/ui/screen/adopt_done.dart';
 import 'package:petfind/Register/ui/screen/pet_adopt_form.dart';
@@ -56,6 +58,8 @@ class MyApp extends StatelessWidget {
         '/acceptRequest': (context) => const  AcceptSolicitud(),
         '/deniedRequest': (context) => const DeniedSolicitud(),
         '/waitingRequest': (context) => const WaitingSolicitud(),
+        '/request': (context) => const PetRequested(),
+        '/requestAccepted': (context) => const AcceptRequest(),
       },
     );
   }

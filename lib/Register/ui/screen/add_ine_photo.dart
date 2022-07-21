@@ -1,16 +1,40 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:petfind/Labels/labels.dart';
+import 'package:petfind/Register/model/sign_in.dart';
+import 'package:petfind/Register/repository/register_controller.dart';
 import 'package:petfind/components/app_bar.dart';
 import 'package:petfind/RegisterPet/ui/widget/continue_button_pet_Register.dart';
 import 'package:petfind/colors/colors_views.dart';
 import 'package:intl/intl.dart';
 import 'package:petfind/components/rounded_btn.dart';
+import 'package:petfind/components/snack_bar_notification.dart';
+import 'package:simple_s3/simple_s3.dart';
 
 class IneOwnerRegister extends StatefulWidget {
-  const IneOwnerRegister({Key? key}) : super(key: key);
+  IneOwnerRegister(
+    this.textControllerUser,
+    this.textControllerPassword,
+    this.textControllerEmail,
+    this.textControllerOwnerName,
+    this.textControllerOwnerAddress,
+    this.textControllerOwnerSuburb,
+    this.textControllerOwnerCP,
+    this.textControllerOwnerPhone,
+    this.signInController,
+  );
+  final TextEditingController textControllerUser;
+  final TextEditingController textControllerPassword;
+  final TextEditingController textControllerEmail;
+  final TextEditingController textControllerOwnerName;
+  final TextEditingController textControllerOwnerAddress;
+  final TextEditingController textControllerOwnerSuburb;
+  final TextEditingController textControllerOwnerCP;
+  final TextEditingController textControllerOwnerPhone;
+  final RegisterController signInController;
 
   @override
   State<IneOwnerRegister> createState() => _IneOwnerRegisterState();
@@ -24,7 +48,10 @@ class _IneOwnerRegisterState extends State<IneOwnerRegister> {
   // var loginController = LoginController(LoginApiRepository());
   TextEditingController dateinput = TextEditingController();
   TextEditingController _textControllerPetName =
-      TextEditingController(text: "");
+  TextEditingController(text: "");
+  SimpleS3 _simpleS3 = SimpleS3();
+  bool isLoading = false;
+  bool uploaded = false;
 
   int cantidad = 0;
   @override
@@ -71,8 +98,35 @@ class _IneOwnerRegisterState extends State<IneOwnerRegister> {
                 btnText: Labels.continueText,
                 color: (cantidad > 0) ? ColorsViews.pink_word : Colors.grey,
                 onPressed: () async {
-                  if(cantidad > 0){
-                    Navigator.pushNamed(context, '/homePetAdoptForm');
+                  var imageFile = await _upload(this.imageFile);
+                  print(imageFile);
+                  if (cantidad > 0) {
+                    try {
+                      EasyLoading.show(status: 'Cargando...');
+                      SignInModel user = SignInModel(
+                        widget.textControllerUser.text,
+                        widget.textControllerPassword.text,
+                        widget.textControllerEmail.text,
+                        widget.textControllerOwnerName.text,
+                        widget.textControllerOwnerAddress.text,
+                        widget.textControllerOwnerSuburb.text,
+                        widget.textControllerOwnerCP.text,
+                        widget.textControllerOwnerPhone.text,
+                        imageFile as String,
+                      );
+
+                      var result = await widget.signInController.signIn(user);
+                      EasyLoading.dismiss();
+                      if (result == 'true') {
+                        Navigator.popAndPushNamed(context, '/success');
+                      } else {
+                        var snackBar =
+                            snackBarNotification(Labels.something_went_wrong);
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
+                    } catch (e) {
+                      print(e);
+                    }
                   }
                 },
               ),
@@ -123,7 +177,7 @@ class _IneOwnerRegisterState extends State<IneOwnerRegister> {
     var picture = await picker.pickImage(source: ImageSource.gallery);
     setState(() {
       if (picture != null) {
-        cantidad ++;
+        cantidad++;
         listImagePath.add(picture.path);
         imageFile = File(picture.path);
       }
@@ -136,7 +190,7 @@ class _IneOwnerRegisterState extends State<IneOwnerRegister> {
     var picture = await picker.pickImage(source: ImageSource.camera);
     setState(() {
       if (picture != null) {
-        cantidad ++;
+        cantidad++;
         listImagePath.add(picture.path);
         imageFile = File(picture.path);
       }
@@ -163,5 +217,32 @@ class _IneOwnerRegisterState extends State<IneOwnerRegister> {
     }
   }
 
+  Future<String?> _upload(File selectedFile) async {
+    String? result;
 
+    if (result == null) {
+      try {
+        setState(() {
+          isLoading = true;
+        });
+        result = await _simpleS3.uploadFile(
+          selectedFile,
+          'bucketramsesprueba1',
+          'us-east-1:7cc6df81-3825-43b9-acb7-8ef7f3ddafb6',
+          AWSRegions.usEast1,
+          debugLog: true,
+          s3FolderPath: "test",
+          accessControl: S3AccessControl.publicRead,
+        );
+        print(result);
+        setState(() {
+          uploaded = true;
+          isLoading = false;
+        });
+      } catch (e) {
+        print(e.toString());
+      }
+    }
+    return result;
+  }
 }

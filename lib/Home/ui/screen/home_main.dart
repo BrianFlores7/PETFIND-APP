@@ -48,16 +48,21 @@ class HomeView extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(
-                  left: width * 0.1,
-                  bottom: height * 0.05,
-                ),
-                child: const Text(
-                  "Requested",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30,
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, '/request');
+                },
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    left: width * 0.1,
+                    bottom: height * 0.05,
+                  ),
+                  child: const Text(
+                    "Requested",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
+                    ),
                   ),
                 ),
               ),
