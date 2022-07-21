@@ -7,8 +7,10 @@ class LoginApiRepository implements LoginRepository {
   static const String URL = "http://login-lb-1665102379.us-east-1.elb.amazonaws.com/login";
 
   @override
-  Future<String> loginUser(LoginModel user) async {
-    var result = 'false';
+  Future<Map<String,String>> loginUser(LoginModel user) async {
+    Map<String, String> result = {
+      "result" : "false"
+    };
     // print("En API ${user.email} ${user.password}");
     Map data = {
       'username': user.email,
@@ -30,7 +32,12 @@ class LoginApiRepository implements LoginRepository {
       (value) async {
         var status = jsonDecode(value.body);
         if (status['status'] != 'error') {
-          return result = "true";
+          result.clear();
+          result = {
+            "result" : "true",
+            "user_id" : status["user_id"],
+          };
+          return result;
         }
       },
     );

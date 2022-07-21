@@ -43,8 +43,8 @@ class CardCatalogPetFindFacebook extends StatelessWidget {
                 bottom: 10,
                 left: 10,
               ),
-              height: 180.0,
-              width: 180.0,
+              height: 100.0,
+              width: 100.0,
               decoration: BoxDecoration(
                   borderRadius: new BorderRadius.circular(10.0),
                   image: DecorationImage(

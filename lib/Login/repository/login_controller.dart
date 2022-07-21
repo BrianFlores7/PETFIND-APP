@@ -6,7 +6,7 @@ class LoginController {
 
   LoginController(this._repository);
 
-  Future<String> login(LoginModel user) async {
+  Future<Map<String, String>> login(LoginModel user) async {
     return _repository.loginUser(user);
   }
 }

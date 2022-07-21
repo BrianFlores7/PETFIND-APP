@@ -11,9 +11,14 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+    Map user = ModalRoute.of(context)!.settings.arguments as Map;
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
-    final GlobalKey _scaffoldKey = new GlobalKey();
+    GlobalKey _scaffoldKey = user["scaffoldKey"];
+    String userId = user["user_id"];
+  
+
     return SafeArea(
       child: Scaffold(
         key: _scaffoldKey,
@@ -50,7 +55,7 @@ class HomeView extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, '/request');
+                  Navigator.pushNamed(context, '/request', arguments: userId);
                 },
                 child: Padding(
                   padding: EdgeInsets.only(
@@ -66,16 +71,19 @@ class HomeView extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(
-                  left: width * 0.1,
-                  top: height * 0.4,
-                ),
-                child: const Text(
-                  "Log out",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30,
+              InkWell(
+                onTap: () => Navigator.popAndPushNamed(context, '/'),
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    left: width * 0.1,
+                    top: height * 0.4,
+                  ),
+                  child: const Text(
+                    "Log out",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
+                    ),
                   ),
                 ),
               ),
@@ -89,8 +97,8 @@ class HomeView extends StatelessWidget {
               scaffoldKey: _scaffoldKey,
             ),
             TextHomeView(height: height, width: width),
-            CardAdopt(width: width, height: height),
-            CardGiveUpAdopt(width: width, height: height),
+            CardAdopt(width: width, height: height, userId : userId,),
+            CardGiveUpAdopt(width: width, height: height, userId : userId),
           ],
         ),
       ),

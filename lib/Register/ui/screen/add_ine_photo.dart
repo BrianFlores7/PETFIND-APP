@@ -48,7 +48,7 @@ class _IneOwnerRegisterState extends State<IneOwnerRegister> {
   // var loginController = LoginController(LoginApiRepository());
   TextEditingController dateinput = TextEditingController();
   TextEditingController _textControllerPetName =
-  TextEditingController(text: "");
+      TextEditingController(text: "");
   SimpleS3 _simpleS3 = SimpleS3();
   bool isLoading = false;
   bool uploaded = false;
@@ -58,6 +58,7 @@ class _IneOwnerRegisterState extends State<IneOwnerRegister> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+    final GlobalKey _scaffoldKey = GlobalKey();
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -118,7 +119,12 @@ class _IneOwnerRegisterState extends State<IneOwnerRegister> {
                       var result = await widget.signInController.signIn(user);
                       EasyLoading.dismiss();
                       if (result == 'true') {
-                        Navigator.popAndPushNamed(context, '/success');
+                        Map key = {"scaffoldKey": _scaffoldKey};
+                        Navigator.popAndPushNamed(
+                          context,
+                          '/success',
+                          arguments: _scaffoldKey,
+                        );
                       } else {
                         var snackBar =
                             snackBarNotification(Labels.something_went_wrong);

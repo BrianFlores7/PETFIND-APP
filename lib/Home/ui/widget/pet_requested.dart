@@ -34,7 +34,7 @@ class CardPetRequested extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(right: 100, left: 50),
                 child: Text(
-                  listPets!.name,
+                  'Aqui iva list pets name',
                   style:
                       TextStyle(fontSize: 25, color: ColorsViews.pink_word),
                 ),
@@ -51,7 +51,7 @@ class CardPetRequested extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                       child: Text(
-                        listPets!.location,
+                        'Tuxtla',
                         style: TextStyle(fontSize: 17),
                       ),
                     ),

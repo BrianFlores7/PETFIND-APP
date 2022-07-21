@@ -14,6 +14,7 @@ class LoginBtn extends StatelessWidget {
     required TextEditingController textControllerEmail,
     required TextEditingController textControllerPassword,
     required this.loginController,
+    required this.scaffoldKey,
   })  : _textControllerEmail = textControllerEmail,
         _textControllerPassword = textControllerPassword,
         super(key: key);
@@ -21,6 +22,7 @@ class LoginBtn extends StatelessWidget {
   final TextEditingController _textControllerEmail;
   final TextEditingController _textControllerPassword;
   final LoginController loginController;
+  final GlobalKey scaffoldKey;
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +41,14 @@ class LoginBtn extends StatelessWidget {
               );
               EasyLoading.show(status: 'Cargando...');
               var result = await loginController.login(user);
-              
+              Map userMap = {"user_id": result["user_id"],
+                  "scaffoldKey": scaffoldKey,};
               EasyLoading.dismiss();
-              if (result == 'true') {
-                Navigator.popAndPushNamed(context, '/success');
+              if (result["result"] == 'true') {
+                Navigator.popAndPushNamed(context, '/success', arguments: userMap);
               } else {
-                var snackBar = snackBarNotification(Labels.password_or_email_incorrect);
+                var snackBar =
+                    snackBarNotification(Labels.password_or_email_incorrect);
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               }
             } catch (e) {

@@ -1,5 +1,5 @@
 import '../model/login.dart';
 
 abstract class LoginRepository{
-  Future<String> loginUser(LoginModel user);
+  Future<Map<String, String>> loginUser(LoginModel user);
 }

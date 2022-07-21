@@ -10,6 +10,7 @@ class PetFinishedAdoptView extends StatelessWidget {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+    final GlobalKey _scaffoldKey = GlobalKey();
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -35,14 +36,19 @@ class PetFinishedAdoptView extends StatelessWidget {
                     style: TextStyle(fontSize: 20),
                   ),
                   Center(
-                  child: RoundedButton(
-                    btnText: 'See status',
-                    color: ColorsViews.pink_word,
-                    onPressed: () async {
-                      Navigator.pushNamed(context, '/success');
-                    },
+                    child: RoundedButton(
+                      btnText: 'See status',
+                      color: ColorsViews.pink_word,
+                      onPressed: () async {
+                        Map key = {"scaffoldKey": _scaffoldKey};
+                        Navigator.pushNamed(
+                          context,
+                          '/success',
+                          arguments: key,
+                        );
+                      },
+                    ),
                   ),
-                ),
                 ],
               ),
             ),

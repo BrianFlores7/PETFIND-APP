@@ -10,6 +10,8 @@ class AcceptRequest extends StatelessWidget {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+    String phone = ModalRoute.of(context)!.settings.arguments as String;
+    final GlobalKey _scaffoldKey = GlobalKey();
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -34,15 +36,24 @@ class AcceptRequest extends StatelessWidget {
                     'Congrats! You accepted.',
                     style: TextStyle(fontSize: 20),
                   ),
-                  Center(
-                  child: RoundedButton(
-                    btnText: 'Continue',
-                    color: ColorsViews.pink_word,
-                    onPressed: () async {
-                      Navigator.pushNamed(context, '/success');
-                    },
+                  Text(
+                    'Contact phone: $phone.',
+                    style: TextStyle(fontSize: 20),
                   ),
-                ),
+                  Center(
+                    child: RoundedButton(
+                      btnText: 'Continue',
+                      color: ColorsViews.pink_word,
+                      onPressed: () async {
+                        Map key = {"scaffoldKey": _scaffoldKey};
+                        Navigator.pushNamed(
+                          context,
+                          '/success',
+                          arguments: key,
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),

@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:petfind/Home/ui/screen/detail_pet.dart';
 import 'package:petfind/colors/colors_views.dart';
 import 'package:petfind/model/pet_model.dart';
+import 'package:petfind/model/pet_model_back.dart';
 
 class CardCatalogPetFind extends StatelessWidget {
   const CardCatalogPetFind({
     Key? key,
     required this.listPets,
+    required this.userId,
   }) : super(key: key);
 
-  final Pet? listPets;
+  final PetBackModel? listPets;
+  final String userId;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,7 @@ class CardCatalogPetFind extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DetailPetView(pet: listPets),
+            builder: (context) => DetailPetView(pet: listPets, userId: userId,),
           ),
         );
       },
@@ -41,9 +44,9 @@ class CardCatalogPetFind extends StatelessWidget {
           children: <Widget>[
             // Usamos ListTile para ordenar la información del card como titulo, subtitulo e icono
             SizedBox(
-              width: 100,
-              height: 100,
-              child: Image.network(listPets!.petImage),
+              width: 80,
+              height: 80,
+              child: Image.network(listPets!.imageUrl, ),
             ),
             Column(
               children: [
@@ -74,7 +77,7 @@ class CardCatalogPetFind extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0),
                         child: Text(
-                          listPets!.birthDate,
+                          listPets!.birthdate,
                         ),
                       ),
                     ],

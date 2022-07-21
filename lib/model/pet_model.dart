@@ -2,20 +2,20 @@ class Pet {
   late String name;
   late String race;
   late String birthDate;
+  late String description;
   late String gender;
   // late List<String> petImage;
   late String petImage;
   late String owner;
-  late String description;
 
   Pet(
     this.name,
     this.race,
     this.birthDate,
+    this.description,
     this.gender,
     this.petImage,
-    this.owner,
-    this.description,
+    this.owner, 
   );
     Pet.fromJson(Map<String, dynamic> json) {
     name = json['name'];

@@ -4,6 +4,7 @@ import 'package:petfind/Home/repository/pet_controller.dart';
 import 'package:petfind/Home/ui/widget/card_catalog_facebook.dart';
 import 'package:petfind/Home/ui/widget/catalog_from_petfind.dart';
 import 'package:petfind/components/app_bar.dart';
+import 'package:petfind/model/pet_facebook.dart';
 import 'package:petfind/model/pet_model.dart';
 
 class PetCatalogView extends StatefulWidget {
@@ -62,6 +63,7 @@ class _PetCatalogViewState extends State<PetCatalogView>
   Widget build(BuildContext context) {
     TabController tabController = TabController(length: count, vsync: this);
     var listPetController = ListPetController(ListPetRepository());
+    String userId = ModalRoute.of(context)!.settings.arguments as String;
     listPetController.fetchListPet();
 
     var width = MediaQuery.of(context).size.width;
@@ -72,16 +74,16 @@ class _PetCatalogViewState extends State<PetCatalogView>
         body: FutureBuilder<Map<String, dynamic>>(
           future: listPetController.fetchListPet(),
           builder: (context, snapshot) {
-            // if (snapshot.connectionState == ConnectionState.waiting) {
-            //   return const Center(
-            //     child: CircularProgressIndicator(),
-            //   );
-            // }
-            // if (snapshot.hasError) {
-            //   return const Center(
-            //     child: Text("Error"),
-            //   );
-            // }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (snapshot.hasError) {
+              return const Center(
+                child: Text("Error"),
+              );
+            }
             return SizedBox(
               width: width,
               child: Column(
@@ -96,34 +98,52 @@ class _PetCatalogViewState extends State<PetCatalogView>
                   Expanded(
                     child: TabBarView(
                       controller: tabController,
-                      children: [ 
-                        const Text(''),
-                        // ListView.separated(
-                        //     itemBuilder: (context, index) {
-                        //       var listPets = snapshot.data?[index];
-                        //       return Column(
-                        //         children: [
-                        //           CardCatalogPetFind(listPets: listPets,),
-                        //         ],
-                        //       );
-                        //     },
-                        //     separatorBuilder: (context, index) {
-                        //       return const Divider(thickness: 0.5, height: 0.5);
-                        //     },
-                        //     itemCount: snapshot.data?.length ?? 0),
+                      children: [
                         ListView.separated(
                             itemBuilder: (context, index) {
-                              var listPetsFacebook = snapshot.data?["petFromFacebook"][index];
+                              var listPets =
+                                  snapshot.data?["petFromApp"][index] ??
+                                      Pet(
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png",
+                                        "",
+                                      );
                               return Column(
                                 children: [
-                                  CardCatalogPetFindFacebook(listPets: listPetsFacebook,),
+                                  CardCatalogPetFind(listPets: listPets, userId: userId),
                                 ],
                               );
                             },
                             separatorBuilder: (context, index) {
                               return const Divider(thickness: 0.5, height: 0.5);
                             },
-                            itemCount: snapshot.data?.length ?? 0),
+                            itemCount: snapshot.data?["petFromApp"].length ?? 0),
+                        ListView.separated(
+                            itemBuilder: (context, index) {
+                              var listPetsFacebook =
+                                  snapshot.data?["petFromFacebook"][index];
+                              return Column(
+                                children: [
+                                  CardCatalogPetFindFacebook(
+                                    listPets: listPetsFacebook ??
+                                        PetFacebookModel(
+                                          0,
+                                          "",
+                                          "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png",
+                                          "",
+                                        ),
+                                  ),
+                                ],
+                              );
+                            },
+                            separatorBuilder: (context, index) {
+                              return const Divider(thickness: 0.5, height: 0.5);
+                            },
+                            itemCount: snapshot.data?["petFromFacebook"].length ?? 0),
                       ],
                     ),
                   ),

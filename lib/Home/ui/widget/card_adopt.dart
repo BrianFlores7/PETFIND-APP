@@ -8,16 +8,18 @@ class CardAdopt extends StatelessWidget {
     Key? key,
     required this.width,
     required this.height,
+    required this.userId
   }) : super(key: key);
 
   final double width;
   final double height;
+  final String userId;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Navigator.pushNamed(context, '/homeCatalog');
+        Navigator.pushNamed(context, '/homeCatalog', arguments: userId);
       },
       child: Card(
         shape: RoundedRectangleBorder(

@@ -1,17 +1,35 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:petfind/Labels/labels.dart';
+import 'package:petfind/RegisterPet/repository/register_controller.dart';
+import 'package:petfind/RegisterPet/repository/register_pet_api.dart';
 import 'package:petfind/components/app_bar.dart';
 import 'package:petfind/RegisterPet/ui/widget/continue_button_pet_Register.dart';
 import 'package:petfind/colors/colors_views.dart';
 import 'package:intl/intl.dart';
 import 'package:petfind/components/rounded_btn.dart';
+import 'package:petfind/components/snack_bar_notification.dart';
 import 'package:simple_s3/simple_s3.dart';
 
+import '../../../model/pet_model.dart';
+
 class PetImageRegister extends StatefulWidget {
-  const PetImageRegister({Key? key}) : super(key: key);
+  PetImageRegister(
+      this.textControllerName,
+      this.textControllerRace,
+      this.textControllerDateOfBirth,
+      this.textControllerGender,
+      this.textControllerDescription,
+      this.userId);
+  final TextEditingController textControllerName;
+  final TextEditingController textControllerRace;
+  final TextEditingController textControllerDateOfBirth;
+  final String? textControllerGender;
+  final TextEditingController textControllerDescription;
+  final String userId;
 
   @override
   State<PetImageRegister> createState() => _PetImageRegisterState();
@@ -21,11 +39,10 @@ class _PetImageRegisterState extends State<PetImageRegister> {
   var imageFile;
   var listImagePath = [];
   List<SizedBox> listImage = [];
+  var registerPetController = RegisterController(RegisterApiPetRepository());
 
   // var loginController = LoginController(LoginApiRepository());
   TextEditingController dateinput = TextEditingController();
-  TextEditingController _textControllerPetName =
-      TextEditingController(text: "");
   SimpleS3 _simpleS3 = SimpleS3();
   bool isLoading = false;
   bool uploaded = false;
@@ -75,7 +92,32 @@ class _PetImageRegisterState extends State<PetImageRegister> {
                 btnText: Labels.continueText,
                 color: (cantidad > 0) ? ColorsViews.pink_word : Colors.grey,
                 onPressed: () async {
-                  _upload(imageFile);
+                  
+                  String? gender;
+                  if (widget.textControllerGender == 'Macho') {
+                    gender = 'M';
+                  } else {
+                    gender = 'H';
+                  }
+                  var imageFile = await  _upload(this.imageFile);
+                  Pet pet = Pet(
+                      widget.textControllerName.text,
+                      widget.textControllerRace.text,
+                      widget.textControllerDateOfBirth.text,
+                      widget.textControllerDescription.text,
+                      gender,
+                      imageFile as String,
+                      widget.userId);
+                  var result = await registerPetController.registerPet(pet);
+                  
+                  if (result == 'true') {
+                    Navigator.pushNamed(context, '/petRegisterFinished');
+                  } else {
+                    var snackBar =
+                        snackBarNotification(Labels.something_went_wrong);
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  }
+
                   // Navigator.pushNamed(context, '/petDescription');
                 },
               ),

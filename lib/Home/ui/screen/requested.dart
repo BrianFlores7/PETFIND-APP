@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petfind/Home/model/request_info.dart';
 import 'package:petfind/Home/model/user_request.dart';
 import 'package:petfind/Home/repository/pet_api.dart';
 import 'package:petfind/Home/repository/pet_controller.dart';
@@ -22,6 +23,7 @@ class _PetRequestedViewState extends State<PetRequested>
 
   @override
   Widget build(BuildContext context) {
+    String userId = ModalRoute.of(context)!.settings.arguments as String;
     var listPetController = ListPetController(ListPetRepository());
 
     var width = MediaQuery.of(context).size.width;
@@ -35,8 +37,8 @@ class _PetRequestedViewState extends State<PetRequested>
             children: [
               AppBarRegister(width),
               Expanded(
-                child: FutureBuilder<List<RequestPetModel>>(
-                  future: listPetController.fetchListRequested(),
+                child: FutureBuilder<List<RequestPetModelInfoWithOwner>>(
+                  future: listPetController.fetchListRequested(userId),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Center(
@@ -73,43 +75,40 @@ class _PetRequestedViewState extends State<PetRequested>
                                 Column(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.only(
-                                          right: 100, left: 50),
+                                      padding: const EdgeInsets.only(left: 10),
                                       child: Text(
-                                        listPets!.name,
+                                        listPets!.nameInterested,
                                         style: TextStyle(
                                             fontSize: 25,
                                             color: ColorsViews.pink_word),
                                       ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 55, right: 35),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Icon(
-                                            Icons.location_city,
-                                            size: 15,
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 8.0, right: 8.0),
-                                            child: Text(
-                                              listPets.location,
-                                              style: TextStyle(fontSize: 17),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Icon(
+                                          Icons.location_city,
+                                          size: 15,
+                                        ),
+                                        Text(
+                                          listPets.petToAdopt,
+                                          style: TextStyle(fontSize: 17),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 10),
                                   child: IconButton(
-                                    onPressed: () {Navigator.pushNamed(context, '/requestAccepted');},
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                        context,
+                                        '/requestAccepted',
+                                        arguments: listPets.contact,
+                                      );
+                                    },
                                     icon: Icon(
                                       Icons.check,
                                       size: 35,
@@ -118,24 +117,9 @@ class _PetRequestedViewState extends State<PetRequested>
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 20),
+                                  padding: const EdgeInsets.only(),
                                   child: IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        listPetController
-                                            .deleteRequest(listPets)
-                                            .then((value) {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                              duration: const Duration(
-                                                  milliseconds: 700),
-                                              content: Text("${value}"),
-                                            ),
-                                          );
-                                        });
-                                      });
-                                    },
+                                    onPressed: () {},
                                     icon: Icon(
                                       Icons.disabled_by_default,
                                       size: 35,

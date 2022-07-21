@@ -21,6 +21,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey _scaffoldKey = GlobalKey();
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return SafeArea(
@@ -105,9 +106,11 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     LoginBtn(
-                        textControllerEmail: _textControllerUser,
-                        textControllerPassword: _textControllerPassword,
-                        loginController: loginController),
+                      textControllerEmail: _textControllerUser,
+                      textControllerPassword: _textControllerPassword,
+                      loginController: loginController,
+                      scaffoldKey: _scaffoldKey,
+                    ),
                     const Center(
                       child: Text(
                         Labels.forgot_password,

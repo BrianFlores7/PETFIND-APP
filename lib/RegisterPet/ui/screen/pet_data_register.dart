@@ -36,6 +36,7 @@ class _PetDataRegisterState extends State<PetDataRegister> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+    String userId = ModalRoute.of(context)!.settings.arguments as String;
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -224,6 +225,7 @@ class _PetDataRegisterState extends State<PetDataRegister> {
                       textControllerDateOfBirth: dateinput,
                       textControllerGender: value,
                       textControllerPetDescription: _textControllerPetDescription,
+                      userId : userId,
                     )
                   ],
                 ),

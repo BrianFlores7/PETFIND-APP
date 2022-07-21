@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:petfind/Home/repository/pet_api.dart';
+import 'package:petfind/Home/repository/pet_controller.dart';
 import 'package:petfind/components/app_bar.dart';
 import 'package:petfind/components/rounded_btn.dart';
 import 'package:petfind/model/pet_model.dart';
+import 'package:petfind/model/pet_model_back.dart';
 import '../../../colors/colors_views.dart';
 
 class DetailPetView extends StatefulWidget {
-  final Pet? pet;
-  const DetailPetView({Key? key, required this.pet}) : super(key: key);
+  final PetBackModel? pet;
+  final String userId;
+  const DetailPetView({Key? key, required this.pet, required this.userId})
+      : super(key: key);
 
   @override
   State<DetailPetView> createState() => _DetailPetView();
@@ -15,6 +20,7 @@ class DetailPetView extends StatefulWidget {
 class _DetailPetView extends State<DetailPetView> {
   int pagePosition = 0;
   PageController _pageController = PageController(initialPage: 0);
+  var listPetController = ListPetController(ListPetRepository());
 
   @override
   Widget build(BuildContext context) {
@@ -33,40 +39,15 @@ class _DetailPetView extends State<DetailPetView> {
                 AppBarRegister(width),
                 Expanded(
                   flex: 1,
-                  child: PageView.builder(
-                    controller: _pageController,
-                    onPageChanged: (value) => {
-                      setState(() {
-                        pagePosition = value;
-                      })
-                    },
-                    itemBuilder: (context, index) => SizedBox(
-                      height: height * 0.2,
-                      child: ContainerBoarding(
-                        image: pet.petImage,
-                      ),
-                    ),
-                    // itemCount: pet.petImage.length,
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(
-                    // pet.petImage.length,
-                    1,
-                    (index) => _animatedContainer(index),
-                  ),
+                  child: Image.network(pet.imageUrl),
                 ),
                 Divider(
                   height: height * 0.02,
                 ),
-                Padding(
-                  padding: EdgeInsets.only(right: width * 0.7),
-                  child: Text(
-                    pet.name,
-                    style:
-                        TextStyle(fontSize: 40, color: ColorsViews.pink_word),
-                  ),
+                Text(
+                  pet.name,
+                  style:
+                      TextStyle(fontSize: 40, color: ColorsViews.pink_word),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -74,7 +55,7 @@ class _DetailPetView extends State<DetailPetView> {
                     Icon(Icons.pets),
                     Text(pet.race),
                     Icon(Icons.calendar_month),
-                    Text(pet.birthDate),
+                    Text(pet.birthdate),
                     Text("Gender: ${pet.gender}"),
                     Icon(Icons.person),
                     // Text(pet.owner),
@@ -90,8 +71,14 @@ class _DetailPetView extends State<DetailPetView> {
                 RoundedButton(
                     color: ColorsViews.pink_word,
                     btnText: 'Adopt',
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/adoptDone');
+                    onPressed: () async {
+                      try {
+                        await listPetController.adopt(pet, widget.userId);
+                        Navigator.pushNamed(context, '/adoptDone',
+                            arguments: pet);
+                      } catch (e) {
+                        print(e);
+                      }
                     })
               ],
             ),

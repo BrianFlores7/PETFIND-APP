@@ -49,7 +49,6 @@ class MyApp extends StatelessWidget {
         '/success': (context) => const HomeView(),
         '/registerPet': (context) => const RegisterPetView(),
         '/registerPetData': (context) => const PetDataRegister(),
-        '/petRegisterImage': (context) => const PetImageRegister(),
         '/petDescription': (context) => PetDescription(),
         '/petRegisterFinished': (context) => const PetFinishedView(),
         '/adoptDone': (context) => const PetFinishedAdoptView(),

@@ -4,12 +4,13 @@ import 'package:petfind/model/pet_model.dart';
 import 'register_repository.dart';
 
 class RegisterApiPetRepository implements RegisterPetRepository {
-  static const String URL = "http://10.0.2.2:8000/create";
+  static const String URL = "http://pet-lb-766662489.us-east-1.elb.amazonaws.com/create";
+  
+  
   String token = "";
 
   @override
   Future<String> registerPet(Pet pet) async {
-    
     var result = 'false';
     Map data = {
       "name": pet.name,
@@ -18,8 +19,8 @@ class RegisterApiPetRepository implements RegisterPetRepository {
       "gender": pet.gender,
       "description": pet.description,
       "location": "Tuxtla Gutierrez",
-      "image_url":
-          "https://www.fundacion-affinity.org/sites/default/files/los-10-sonidos-principales-del-perro.jpg"
+      "image_url": pet.petImage,
+      "owner_id" : int.parse(pet.owner),
     };
     String jsonObject = json.encode(data);
 

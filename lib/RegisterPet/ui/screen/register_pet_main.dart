@@ -26,6 +26,7 @@ class _RegisterPetView extends State<RegisterPetView> {
 
   @override
   Widget build(BuildContext context) {
+    String userId = ModalRoute.of(context)!.settings.arguments as String;
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -74,7 +75,7 @@ class _RegisterPetView extends State<RegisterPetView> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 120, bottom: 20),
-                          child: _nextButton(),
+                          child: _nextButton(userId),
                         )
                       ],
                     ),
@@ -88,7 +89,7 @@ class _RegisterPetView extends State<RegisterPetView> {
     );
   }
 
-  SizedBox _nextButton() {
+  SizedBox _nextButton(userId) {
     return SizedBox(
       width: 270,
       height: 40,
@@ -107,7 +108,7 @@ class _RegisterPetView extends State<RegisterPetView> {
               curve: Curves.decelerate,
             );
           } else {
-            Navigator.pushNamed(context, '/registerPetData');
+            Navigator.pushNamed(context, '/registerPetData', arguments: userId);
           }
         },
         child: Text(

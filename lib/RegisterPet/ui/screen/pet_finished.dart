@@ -8,6 +8,7 @@ class PetFinishedView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey _scaffoldKey = GlobalKey();
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return SafeArea(
@@ -35,14 +36,19 @@ class PetFinishedView extends StatelessWidget {
                     style: TextStyle(fontSize: 20),
                   ),
                   Center(
-                  child: RoundedButton(
-                    btnText: Labels.continueText,
-                    color: ColorsViews.pink_word,
-                    onPressed: () async {
-                      Navigator.pushNamed(context, '/success');
-                    },
+                    child: RoundedButton(
+                      btnText: Labels.continueText,
+                      color: ColorsViews.pink_word,
+                      onPressed: () {
+                        Map key = {"scaffoldKey": _scaffoldKey};
+                        Navigator.pushNamed(
+                          context,
+                          '/success',
+                          arguments: key,
+                        );
+                      },
+                    ),
                   ),
-                ),
                 ],
               ),
             ),
