@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Chau Philomene One',
       ),
-      initialRoute: '/register_page',
+      initialRoute: '/',
       routes: {
         '/': (context) => Login(),
         '/register_page': (context) => CreateAccount(),

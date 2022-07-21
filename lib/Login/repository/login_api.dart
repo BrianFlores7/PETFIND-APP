@@ -4,7 +4,7 @@ import '../model/login.dart';
 import 'login_repository.dart';
 
 class LoginApiRepository implements LoginRepository {
-  static const String URL = "http://10.0.2.2:3000/api/login";
+  static const String URL = "http://login-lb-1665102379.us-east-1.elb.amazonaws.com/login";
 
   @override
   Future<String> loginUser(LoginModel user) async {
