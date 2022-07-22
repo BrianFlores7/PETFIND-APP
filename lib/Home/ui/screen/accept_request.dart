@@ -42,15 +42,11 @@ class AcceptRequest extends StatelessWidget {
                   ),
                   Center(
                     child: RoundedButton(
-                      btnText: 'Continue',
+                      btnText: 'Go back',
                       color: ColorsViews.pink_word,
                       onPressed: () async {
                         Map key = {"scaffoldKey": _scaffoldKey};
-                        Navigator.pushNamed(
-                          context,
-                          '/success',
-                          arguments: key,
-                        );
+                        Navigator.pop(context);
                       },
                     ),
                   ),

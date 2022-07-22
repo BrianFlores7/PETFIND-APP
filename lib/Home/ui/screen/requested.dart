@@ -70,7 +70,7 @@ class _PetRequestedViewState extends State<PetRequested>
 
                             // La propiedad child anida un widget en su interior
                             // Usamos columna para ordenar un ListTile y una fila con botones
-                            child: Row(
+                            child: Column(
                               children: <Widget>[
                                 Column(
                                   children: [
@@ -85,11 +85,14 @@ class _PetRequestedViewState extends State<PetRequested>
                                     ),
                                     Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.center,
                                       children: [
                                         Icon(
-                                          Icons.location_city,
-                                          size: 15,
+                                          Icons.pets,
+                                          size: 20,
+                                        ),
+                                        SizedBox(
+                                          width: 10,
                                         ),
                                         Text(
                                           listPets.petToAdopt,
@@ -99,34 +102,39 @@ class _PetRequestedViewState extends State<PetRequested>
                                     ),
                                   ],
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: IconButton(
-                                    onPressed: () {
-                                      Navigator.pushNamed(
-                                        context,
-                                        '/requestAccepted',
-                                        arguments: listPets.contact,
-                                      );
-                                    },
-                                    icon: Icon(
-                                      Icons.check,
-                                      size: 35,
-                                      color: Colors.green,
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: IconButton(
+                                        onPressed: () {
+                                          Navigator.pushNamed(
+                                            context,
+                                            '/requestAccepted',
+                                            arguments: listPets.contact,
+                                          );
+                                        },
+                                        icon: Icon(
+                                          Icons.check,
+                                          size: 35,
+                                          color: Colors.green,
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(),
-                                  child: IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.disabled_by_default,
-                                      size: 35,
-                                      color: Colors.red,
+                                    Padding(
+                                      padding: const EdgeInsets.only(),
+                                      child: IconButton(
+                                        onPressed: () {},
+                                        icon: Icon(
+                                          Icons.disabled_by_default,
+                                          size: 35,
+                                          color: Colors.red,
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ),
+                                  ],
+                                )
                               ],
                             ),
                           );

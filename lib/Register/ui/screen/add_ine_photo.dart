@@ -67,31 +67,23 @@ class _IneOwnerRegisterState extends State<IneOwnerRegister> {
             children: [
               AppBarRegister(width),
               Padding(
-                padding: EdgeInsets.only(right: width * 0.5),
+                padding: EdgeInsets.only(right: width * 0.01),
                 child: Column(
                   children: const <Widget>[
                     Text(
-                      Labels.pet_data,
+                      "INE",
                       style: TextStyle(fontSize: 40),
                     ),
                     Text(
-                      Labels.petImages,
+                      "Add your INE so we can verify you.",
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 30,
                         color: ColorsViews.pink_word,
+                      
                       ),
                     ),
                   ],
-                ),
-              ),
-              SizedBox(
-                width: width * 0.8,
-                child: const Text(
-                  Labels.beSureToUpload,
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: ColorsViews.grey_word,
-                  ),
                 ),
               ),
               _setImageView(width, height),
@@ -122,8 +114,7 @@ class _IneOwnerRegisterState extends State<IneOwnerRegister> {
                         Map key = {"scaffoldKey": _scaffoldKey};
                         Navigator.popAndPushNamed(
                           context,
-                          '/success',
-                          arguments: _scaffoldKey,
+                          '/',
                         );
                       } else {
                         var snackBar =

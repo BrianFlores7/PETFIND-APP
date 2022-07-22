@@ -40,7 +40,10 @@ class PetFinishedAdoptView extends StatelessWidget {
                       btnText: 'See status',
                       color: ColorsViews.pink_word,
                       onPressed: () async {
-                        Map key = {"scaffoldKey": _scaffoldKey};
+                        Map key = {
+                          "scaffoldKey": _scaffoldKey,
+                          "user_id" : ModalRoute.of(context)!.settings.arguments as String,
+                        };
                         Navigator.pushNamed(
                           context,
                           '/success',

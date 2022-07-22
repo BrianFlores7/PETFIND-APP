@@ -40,7 +40,11 @@ class PetFinishedView extends StatelessWidget {
                       btnText: Labels.continueText,
                       color: ColorsViews.pink_word,
                       onPressed: () {
-                        Map key = {"scaffoldKey": _scaffoldKey};
+                        Map key = {
+                          "scaffoldKey": _scaffoldKey,
+                          "user_id" : ModalRoute.of(context)!.settings.arguments as String,
+                        };
+                        print("Valor del scaffold $_scaffoldKey");
                         Navigator.pushNamed(
                           context,
                           '/success',

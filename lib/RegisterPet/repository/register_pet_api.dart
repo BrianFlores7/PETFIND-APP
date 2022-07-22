@@ -23,7 +23,7 @@ class RegisterApiPetRepository implements RegisterPetRepository {
       "owner_id" : int.parse(pet.owner),
     };
     String jsonObject = json.encode(data);
-
+    print("Llego hasta antes del htttp");
     await http
         .post(Uri.parse(URL),
             headers: <String, String>{
@@ -33,6 +33,7 @@ class RegisterApiPetRepository implements RegisterPetRepository {
             body: jsonObject)
         .then(
       (value) async {
+        print("valor de ${value.statusCode}");
         var status = jsonDecode(value.body);
         if (status['status'] != 'error') {
           return result = "true";

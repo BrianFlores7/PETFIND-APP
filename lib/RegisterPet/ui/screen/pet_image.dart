@@ -111,7 +111,7 @@ class _PetImageRegisterState extends State<PetImageRegister> {
                   var result = await registerPetController.registerPet(pet);
                   
                   if (result == 'true') {
-                    Navigator.pushNamed(context, '/petRegisterFinished');
+                    Navigator.pushNamed(context, '/petRegisterFinished', arguments: widget.userId);
                   } else {
                     var snackBar =
                         snackBarNotification(Labels.something_went_wrong);

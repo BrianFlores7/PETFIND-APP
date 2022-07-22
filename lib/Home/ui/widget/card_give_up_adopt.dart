@@ -18,7 +18,7 @@ class CardGiveUpAdopt extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, '/registerPet', arguments: userId);
+        Navigator.pushNamed(context, '/registerPetData', arguments: userId);
       },
       child: Card(
         shape: RoundedRectangleBorder(

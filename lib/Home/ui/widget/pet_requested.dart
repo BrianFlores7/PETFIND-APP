@@ -27,7 +27,7 @@ class CardPetRequested extends StatelessWidget {
 
       // La propiedad child anida un widget en su interior
       // Usamos columna para ordenar un ListTile y una fila con botones
-      child: Row(
+      child: Column(
         children: <Widget>[
           Column(
             children: [

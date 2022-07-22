@@ -74,8 +74,12 @@ class _DetailPetView extends State<DetailPetView> {
                     onPressed: () async {
                       try {
                         await listPetController.adopt(pet, widget.userId);
+                        Map key = {
+                          "pet": pet,
+                          "user_id" : widget.userId,
+                        };
                         Navigator.pushNamed(context, '/adoptDone',
-                            arguments: pet);
+                            arguments: widget.userId);
                       } catch (e) {
                         print(e);
                       }
